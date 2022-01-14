@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const mongoose=require('mongoose');
 
 
 var home = require('./routes/home');
@@ -18,6 +19,20 @@ var login = require('./routes/login');
   });
 
 const port=5000;
+
+
+try {
+  mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/projectTrinity?retryWrites=true&w=majority',{ useUnifiedTopology: true });
+  const db=mongoose.connection;
+  db.on("error", console.error.bind(console, "connection error: "));
+  db.once("open", function () {
+  console.log("successfully Connected to the mongo");
+});
+} catch (error) {
+  console.log(error);
+}
+
+
 
 
 // app.get('/',(req,res)=>{
