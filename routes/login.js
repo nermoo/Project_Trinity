@@ -5,8 +5,6 @@ const passport=require('passport');
 const localStrategy=require('passport-local').Strategy;
 const bcrypt=require('bcrypt');
 const User=require('./../models/user');
-const bodyParser=require('body-parser');
-
 
 
 passport.serializeUser(function(user,done) {
@@ -48,7 +46,7 @@ passport.use(new localStrategy(
         req.login(user,(err)=>{
           console.log(user);
           if(err) console.log(err); 
-          res.send({user:req.user,info:info});
+          res.send({user:req.user,info:info});    //sending status to the frontend
           console.log(info.status);
         })
       }

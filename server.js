@@ -39,11 +39,6 @@ try {
 
 
 
-
-// app.get('/',(req,res)=>{
-//     res.send("aravinda is da man");
-// })
-
 var home = require('./routes/home');
 var reg = require('./routes/register');
 var login = require('./routes/login');
