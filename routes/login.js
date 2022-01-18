@@ -4,8 +4,6 @@ const router=express.Router();
 const passport=require('passport');
 const localStrategy=require('passport-local').Strategy;
 const bcrypt=require('bcrypt');
-const cookieParser=require('cookie-parser');
-const session=require('express-session');
 const User=require('./../models/user');
 const bodyParser=require('body-parser');
 
@@ -43,9 +41,7 @@ passport.use(new localStrategy(
   }))
 
   router.post('/', async (req,res,next)=>{
-    console.log(req.body);
     passport.authenticate('local',(err,user,info)=>{
-      console.log("here also");
       if(err) return  res.send({info:info});
       if(!user) return res.send({info:info});
       else{
