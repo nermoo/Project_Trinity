@@ -5,8 +5,8 @@ const bcrypt=require('bcrypt');
 
 router.get('/',(req,res,next)=>{
 
-    const userName="aravinda";
-    const password="kolitha";
+    const userName="koli";
+    const password="koli";
 
     const saltRounds=10;
 
