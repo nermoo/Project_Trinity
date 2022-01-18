@@ -1,12 +1,9 @@
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
-
-
-var home = require('./routes/home');
-var reg = require('./routes/register');
-var login = require('./routes/login');
- 
+const cookieParser=require('cookie-parser');
+const session=require('express-session');
+const passport=require('passport');
 
 
  app.use(express.json());
@@ -19,7 +16,15 @@ var login = require('./routes/login');
   });
 
 const port=5000;
-
+app.use(cookieParser('nerm'))
+app.use(session({
+    secret:"nerm",
+    resave:true,
+    saveUninitialized: true
+  }))
+  
+  app.use(passport.initialize());
+  app.use(passport.session());
 
 try {
   mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/projectTrinity?retryWrites=true&w=majority',{ useUnifiedTopology: true });
@@ -38,6 +43,12 @@ try {
 // app.get('/',(req,res)=>{
 //     res.send("aravinda is da man");
 // })
+
+var home = require('./routes/home');
+var reg = require('./routes/register');
+var login = require('./routes/login');
+
+
 app.use('/login',login);
 app.use('/',home);
 app.use('/reg',reg);

@@ -21,24 +21,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
+app.use(cookieParser('nerm'))
 app.use(session({
-    secret:"nermo",
+    secret:"nerm",
     resave:true,
     saveUninitialized: true
   }))
-  app.use(cookieParser('nermo'))
+  
   app.use(passport.initialize());
   app.use(passport.session());
 
 passport.serializeUser(function(user,done) {
-  console.log("i was here");
+  
     done(null,user.id)
 });
 
 passport.deserializeUser(function(id,done){
-  console.log("i was here too");
   User.findById(id,function(err,user){
+    console.log("aravinda ok");
     done(err,user);
   })
 })
@@ -50,14 +50,16 @@ passport.use(new localStrategy(
       passwordField:'Password'
   },
     function(username,password,done){
-    User.findOne({Username:username},function(err,user){
+      console.log(username);
+    User.findOne({name:username},function(err,user){
+      console.log(user);
       if (err)  return done(err);
       if (!user) return done(null,false,{message:'Incorrect Username',status:false});
-
-      bcrypt.compare(password,user.Password,function(err,res){
+      
+      bcrypt.compare(password,user.password,function(err,res){
+        console.log(err);
           if(err) return done(err);
           if(res===false) return done(null,false,{message:'Incorrect password',status:false});
-          console.log(user);
           return done(null,user,{message:'success',status:true});
           
 
@@ -67,7 +69,8 @@ passport.use(new localStrategy(
 
   router.post('/', async (req,res,next)=>{
     console.log(req.body);
-    passport.authenticate("local",(err,user,info)=>{
+    passport.authenticate('local',(err,user,info)=>{
+      console.log("here also");
       if(err) return  res.send({info:info});
       if(!user) return res.send({info:info});
       else{
