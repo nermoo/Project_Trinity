@@ -36,6 +36,10 @@ const Signup=()=>{
     }
     if(!values.userName){
       errors.userName="Username is required";
+    }if(!values.password){
+      errors.password="Password is required";
+    }if(!values.role){
+      errors.role="Please select a role";
     }
     return errors;
   }
@@ -50,7 +54,7 @@ const Signup=()=>{
                        <FormControl variant="standard" fullWidth>
                             <InputLabel id="demo-simple-select-standard-label">Role</InputLabel>
                             <Select
-                            value={role}
+                            value={reg.role}
                             onChange={formHandle}
                             label="Role"
                             name='role'
@@ -60,7 +64,7 @@ const Signup=()=>{
                             <MenuItem value={"writer"}>Writer</MenuItem>
                             </Select>
                         </FormControl>
-                        <TextField error={Errors.userName} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
+                        <TextField error={!!Errors.password} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
                         
                         <input type='file'></input>
                         <Button onClick={handleReg}>Submit</Button>
