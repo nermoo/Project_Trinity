@@ -39,6 +39,7 @@ passport.use(new localStrategy(
   }))
 
   router.post('/', async (req,res,next)=>{
+    console.log(req.body);
     passport.authenticate('local',(err,user,info)=>{
       if(err) return  res.send({info:info});
       if(!user) return res.send({info:info});

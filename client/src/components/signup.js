@@ -1,11 +1,11 @@
 import React from 'react';
 import {useState} from 'react';
-import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography } from '@mui/material';
+import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography,FormLabel } from '@mui/material';
+import axios from 'axios';
 
 
 const Signup=()=>{
 
-    const [role, setRole] = useState('');
     const [reg,setreg]=useState({
       email:'',
       userName:'',
@@ -13,6 +13,7 @@ const Signup=()=>{
       role:''
 
     });
+    const [image,setImg]=useState();
     const [Errors,setErr]=useState({});
 
 
@@ -22,6 +23,10 @@ const Signup=()=>{
     const { name, value } = e.target;
     setreg({...reg,[name]:value});
     
+  }
+
+  const fileHandle=(e)=>{
+    setImg(e.target.files[0]);
   }
 
   const handleReg=(e)=>{
@@ -40,6 +45,21 @@ const Signup=()=>{
       errors.password="Password is required";
     }if(!values.role){
       errors.role="Please select a role";
+    }else{
+      try {
+        let formdata=new FormData();
+        formdata.append('info',reg);
+        formdata.append('image',image)
+        for(var pair of formdata.entries()) {
+          console.log(pair[0]+', '+pair[1]);
+        }
+        axios.post('http://localhost:5000/reg',formdata,{headers: formdata.getHeaders()}).then(res=>{
+
+          console.log(res);
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
     return errors;
   }
@@ -65,8 +85,8 @@ const Signup=()=>{
                             </Select>
                         </FormControl>
                         <TextField error={!!Errors.password} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
-                        
-                        <input type='file'></input>
+                        <FormLabel sx={{textAlign:'left'}}>Inser a profile picture</FormLabel>
+                        <input onChange={(e)=>fileHandle(e)} type='file' name='profilepic' id="profilepic"></input><br/>
                         <Button onClick={handleReg}>Submit</Button>
                            </Grid> 
                        <Grid item xs={2}></Grid> 

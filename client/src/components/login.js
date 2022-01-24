@@ -13,15 +13,18 @@ const Login=()=>{
     // });
     const [userName,setUname]=useState('');
     const [password,setPass]=useState('');
-    const [msg,setMsg]=useState('');
-    console.log(userName);
+    const [loginEr,setLe]=useState('');
+    const [Errors,setErr]=useState({});
 
-    const handleLogin=()=>{
 
-        if(userName==='' || password===''){
-            setMsg("Please Enter both Username and Password");
+    const validate=()=>{
+        const errors={};
+        if(!userName){
+            errors.userName="Enter username";
         }
-        else{
+        if(!password){
+            errors.password="Enter password";
+        }else{
             try {
                 axios.post('http://localhost:5000/login',{
                     Name:userName,
@@ -31,15 +34,27 @@ const Login=()=>{
                     const status=res.data.info.status;
                     const message=res.data.info.message;
                     if(status===true){
-                        setMsg("you are logged in");
+                        setLe("Logged in");
                     }else{
-                        setMsg(message);
+                       setLe("Username or password do not match");
                     }
+                    
                 })
             } catch (error) {
                 console.log(error);
             }
         }
+        return errors;
+    };
+
+    const handleLog=()=>{
+        setErr(validate);
+    }
+
+    const handleLogin=()=>{
+        
+        
+            
     
     }
 
@@ -48,13 +63,14 @@ const Login=()=>{
         <Grid container>
                        <Grid item xs={2}></Grid> 
                        <Grid item xs={8}>
-                       <TextField fullWidth onChange={(e)=>(setUname(e.target.value))} sx={{marginBottom:'10px', marginTop:'20px'}} multiline placeholder='Enter username' id="userName" label="Username" variant="standard" /><br/>
-                       <TextField fullWidth onChange={(e)=>(setPass(e.target.value))} sx={{marginBottom:'20px'}} placeholder='Enter password' id="password" type="password" label="Password" variant="standard" />
-                          <Button onClick={handleLogin}>Submit</Button>
+                       <Typography sx={{color:'red',fontSize:'12px'}}>{loginEr}</Typography>
+                       <TextField error={Errors.userName} helperText={Errors.userName} fullWidth onChange={(e)=>(setUname(e.target.value))} sx={{marginBottom:'10px', marginTop:'20px'}} multiline placeholder='Enter username' id="userName" label="Username" variant="standard" /><br/>
+                       <TextField error={Errors.password} helperText={Errors.password} fullWidth onChange={(e)=>(setPass(e.target.value))} sx={{marginBottom:'20px'}} placeholder='Enter password' id="password" type="password" label="Password" variant="standard" />
+                          <Button onClick={handleLog}>Submit</Button>
                            </Grid> 
                        <Grid item xs={2}></Grid> 
 
-                       <Typography>{msg}</Typography>
+                       
                     </Grid>
     );
 }
