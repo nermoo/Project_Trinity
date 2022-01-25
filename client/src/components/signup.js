@@ -53,7 +53,7 @@ const Signup=()=>{
         for(var pair of formdata.entries()) {
           console.log(pair[0]+', '+pair[1]);
         }
-        axios.post('http://localhost:5000/reg',formdata,{headers: formdata.getHeaders()}).then(res=>{
+        axios.post('http://localhost:3000/reg',formdata).then(res=>{
 
           console.log(res);
         })
