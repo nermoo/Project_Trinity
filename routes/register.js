@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
         cb(null, DIR);
     },
     filename: (req, file, cb) => {
-        console.log(file);
         const fileName = Date.now() + path.extname(file.originalname);
         cb(null,fileName);
     }
@@ -36,20 +35,22 @@ var upload = multer({   //https://morioh.com/p/5c99be0fb5aa here is the link
 
 router.post('/',upload.single("image"),(req,res,next)=>{
 
-    console.log(req.file);
-    res.status(200).send(true);
-
+    
+    const userName=req.body.userName;
+    const email=req.body.email;
+    const role=req.body.role;
+    const password=req.body.password;
     const saltRounds=10;
-    const url = req.protocol + '://' + req.get('host');
-    const path= url + '/public/' + req.file.filename;
-    console.log(path);
+    // const url = req.protocol + '://' + req.get('host');
+    // const path= url + '/public/' + req.file.filename;
+    imageName=req.file.filename;
 
     bcrypt.genSalt(saltRounds,function(err,salt){
       if(err) return (err);
       bcrypt.hash(password,salt, function(err,hash){
         if(err) return(err);
         console.log(hash);
-        const Usr= new user({name:userName,password:hash,profilePic:path});
+        const Usr= new user({name:userName,password:hash,profilePic:imageName,role:role,email:email});
         Usr.save((error,userStatus)=>{
           if(error){
             console.log(error);

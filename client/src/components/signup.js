@@ -48,8 +48,11 @@ const Signup=()=>{
     }else{
       try {
         let formdata=new FormData();
-        formdata.append('info',reg);
-        formdata.append('image',image)
+        formdata.append('userName',reg.userName);
+        formdata.append('email',reg.email);
+        formdata.append('role',reg.role);
+        formdata.append('password',reg.password);
+        formdata.append('image',image);
         for(var pair of formdata.entries()) {
           console.log(pair[0]+', '+pair[1]);
         }

@@ -49,11 +49,13 @@ try {
 var home = require('./routes/home');
 var reg = require('./routes/register');
 var login = require('./routes/login');
+var user=require('./routes/user');
 
 
 app.use('/login',login);
 app.use('/',home);
 app.use('/reg',reg);
+app.use('/user',user);
 
 
 
