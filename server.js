@@ -50,13 +50,17 @@ var home = require('./routes/home');
 var reg = require('./routes/register');
 var login = require('./routes/login');
 var user=require('./routes/user');
+var image=require('./routes/images');
 
 
 app.use('/login',login);
 app.use('/',home);
 app.use('/reg',reg);
 app.use('/user',user);
+app.use('/image',image);
 
+
+app.use(express.static('public'));
 
 
 app.listen(port,()=>{

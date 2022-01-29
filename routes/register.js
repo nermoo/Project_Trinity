@@ -41,9 +41,10 @@ router.post('/',upload.single("image"),(req,res,next)=>{
     const role=req.body.role;
     const password=req.body.password;
     const saltRounds=10;
-    // const url = req.protocol + '://' + req.get('host');
-    // const path= url + '/public/' + req.file.filename;
+    const url = req.protocol + '://' + req.get('host');
+    const path= url+ '/' + req.file.filename;
     imageName=req.file.filename;
+    console.log(path);
 
     bcrypt.genSalt(saltRounds,function(err,salt){
       if(err) return (err);

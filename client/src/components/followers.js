@@ -1,13 +1,33 @@
 import React from 'react';
 import { Grid, Card, Avatar, Typography } from '@mui/material';
+import { useState,useEffect } from 'react'
 import Scroll from 'react-scroll';
+import axios from 'axios';
 
 
 const Followers=()=>{ //we can use props to pass the height to this component from dashboard
 
     let innerHeight=window.innerHeight;
-    const Element=Scroll.Element
-    const followers=[{name:'aravinda nawarathna', image:'https://picsum.photos/200/300'},{name:'thejana lakshan', image:'https://picsum.photos/200/300'},{name:'will smith', image:'https://picsum.photos/200/300'},{name:'henry cavill', image:'https://picsum.photos/200/300'},{name:'json statham', image:'https://picsum.photos/200/300'},{name:'hugh jackman', image:'https://picsum.photos/200/300'},{name:'tom cruise', image:'https://picsum.photos/200/300'},{name:'superman', image:'https://picsum.photos/200/300'},{name:'matt damon', image:'https://picsum.photos/200/300'}]
+    const Element=Scroll.Element;
+    // const [image,setImage]=useState();
+
+    // axios.get(' http://localhost:5000/user').then(res=>{
+    //     // const base64 = btoa(
+    //     //     new Uint8Array(res.data).reduce(
+    //     //       (data, byte) => data + String.fromCharCode(byte),
+    //     //       '',
+    //     //     ),
+    //     //   );
+    //     //   setImage({ source: "data:;base64," + base64 });
+    //     console.log(res.data);
+    //     setImage(res.data);
+    //     });
+
+        // useEffect({
+
+        // },[pimage])
+
+    const followers=[{name:'aravinda nawarathna', image:'http://localhost:5000/head.jpg'},{name:'thejana lakshan', image:'http://localhost:5000/index.jpg'},{name:'will smith', image:'https://picsum.photos/200/300'},{name:'henry cavill', image:'https://picsum.photos/200/300'},{name:'json statham', image:'https://picsum.photos/200/300'},{name:'hugh jackman', image:'https://picsum.photos/200/300'},{name:'tom cruise', image:'https://picsum.photos/200/300'},{name:'superman', image:'https://picsum.photos/200/300'},{name:'matt damon', image:'https://picsum.photos/200/300'}]
 
     return(
         <Grid container>
@@ -28,7 +48,7 @@ const Followers=()=>{ //we can use props to pass the height to this component fr
                     <Card sx={{marginBottom:'10px'}} variant='outlined'>
                     <Grid container>
                         <Grid item xs={2}>
-                        <Avatar sx={{margin:'10px',marginLeft:'auto',marginRight:'auto'}} alt="Travis Howard" src={follower.image} />
+                        <Avatar sx={{margin:'10px',marginLeft:'auto',marginRight:'auto'}} alt={follower.name} src={follower.image}/>
                         </Grid>
                         <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={10}>
                             <Typography >

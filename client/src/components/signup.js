@@ -56,7 +56,7 @@ const Signup=()=>{
         for(var pair of formdata.entries()) {
           console.log(pair[0]+', '+pair[1]);
         }
-        axios.post('http://localhost:3000/reg',formdata).then(res=>{
+        axios.post('/reg',formdata).then(res=>{
 
           console.log(res);
         })
@@ -88,7 +88,7 @@ const Signup=()=>{
                             </Select>
                         </FormControl>
                         <TextField error={!!Errors.password} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
-                        <FormLabel sx={{textAlign:'left'}}>Inser a profile picture</FormLabel>
+                        <FormLabel sx={{textAlign:'left'}}>Upload a profile picture</FormLabel>
                         <input onChange={(e)=>fileHandle(e)} type='file' name='profilepic' id="profilepic"></input><br/>
                         <Button onClick={handleReg}>Submit</Button>
                            </Grid> 
