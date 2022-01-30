@@ -15,7 +15,7 @@ export default function Footer() {
     }
 
   return (
-    <BottomNavigation sx={{ width: '100%', color:'black', backgroundColor:'E85A4F',position:'fixed', bottom:'0px' }} value={value} onChange={handleChange}>
+    <BottomNavigation sx={{ width: '100%', color:'black', backgroundColor:'#E85A4F',position:'fixed', bottom:'0px' }} value={value} onChange={handleChange}>
         <a href='https://github.com/nermoo'>
         <BottomNavigationAction
         label="Recents"

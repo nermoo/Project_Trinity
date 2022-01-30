@@ -46,11 +46,11 @@ export default function blogCard() {
                       <Typography sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>{userName}</Typography>
                   </Grid>
                       <CardContent>
-                        <Title>
-                            Learn react aravinda kolitha 
+                        <Title sx={{color:'black'}}>
+                            Learn react custom hooks
                         </Title>
                         <Typography>
-                        loremIrure eu consequat consequat reprehenderit aute nulla deserunt excepteur qui. Aliquip ex et eu dolor ut id eu minim cillum sunt quis. Occaecat excepteur velit laborum commodo culpa sunt in mollit est. Est eiusmod laborum velit non Lorem. Dolore deserunt non ea ipsum proident nostrud enim exercitation velit.
+                        loremIrure eu consequat consequat reprehenderit aute nulla deserunt excepteur qui. Aliquip ex 
                         </Typography>
                       </CardContent>
                       <CardActions>
