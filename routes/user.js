@@ -1,8 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const fs=require('fs');
-// D:\projects\miniProject\repo\public\1643222638828.jpg
-
+const User=require('./../models/user');
 
 router.get('/', async (req,res,next)=>{
 
@@ -19,8 +18,11 @@ fs.readFile(file,(err,content)=>{
         res.send("No image");
     }else{
         res.writeHead(200,{'Content-type':'image/jpg'});
-        res.end(content);
+        
     }
+
+    //userslawa ganda one unge id eka use krla
+    
 })
   })
 

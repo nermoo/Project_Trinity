@@ -11,21 +11,10 @@ const Followers=()=>{ //we can use props to pass the height to this component fr
     const Element=Scroll.Element;
     // const [image,setImage]=useState();
 
-    // axios.get(' http://localhost:5000/user').then(res=>{
-    //     // const base64 = btoa(
-    //     //     new Uint8Array(res.data).reduce(
-    //     //       (data, byte) => data + String.fromCharCode(byte),
-    //     //       '',
-    //     //     ),
-    //     //   );
-    //     //   setImage({ source: "data:;base64," + base64 });
-    //     console.log(res.data);
-    //     setImage(res.data);
-    //     });
+    axios.get(' http://localhost:5000/user').then(res=>{
+        
+    })
 
-        // useEffect({
-
-        // },[pimage])
 
     const followers=[{name:'aravinda nawarathna', image:'http://localhost:5000/head.jpg'},{name:'thejana lakshan', image:'http://localhost:5000/index.jpg'},{name:'will smith', image:'https://picsum.photos/200/300'},{name:'henry cavill', image:'https://picsum.photos/200/300'},{name:'json statham', image:'https://picsum.photos/200/300'},{name:'hugh jackman', image:'https://picsum.photos/200/300'},{name:'tom cruise', image:'https://picsum.photos/200/300'},{name:'superman', image:'https://picsum.photos/200/300'},{name:'matt damon', image:'https://picsum.photos/200/300'}]
 

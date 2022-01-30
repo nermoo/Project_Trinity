@@ -11,6 +11,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { TextField,Card,Grid } from '@mui/material';
 import Login from './login';
 import Signup from './signup';
+import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 
 
 
@@ -32,7 +33,9 @@ export default function LoginForm() {
       <TabContext sx value={value} >
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
           <TabList TabIndicatorProps={{sx: { backgroundColor: 'red',},}} textColor='red' onChange={handleChange} aria-label="lab API tabs example" centered>
+            <Link to="/login">
             <Tab   title="Reader" label="Log in" value="1" />
+            </Link>
             <Tab  title="Writer" label='Sign up' value="2" />
           </TabList>
         </Box>
