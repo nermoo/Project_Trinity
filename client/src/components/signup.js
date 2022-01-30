@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography,FormLabel } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 const Signup=()=>{
@@ -15,6 +16,7 @@ const Signup=()=>{
     });
     const [image,setImg]=useState();
     const [Errors,setErr]=useState({});
+    let navigate = useNavigate();
 
 
   console.log(reg);
@@ -59,6 +61,7 @@ const Signup=()=>{
         axios.post('/reg',formdata).then(res=>{
 
           console.log(res);
+          //this should redirected to the authpage.
         })
       } catch (error) {
         console.log(error);

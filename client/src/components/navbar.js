@@ -11,12 +11,12 @@ const Nav=()=>{
 
 
     return(
-        <AppBar sx={{marginBottom:'20px', backgroundColor:'salmon'}} position="static">
+        <AppBar sx={{marginBottom:'20px', backgroundColor:'#E85A4F'}} position="static">
         <Toolbar>
           <Link to="/">
           <Typography>
             <Button>
-            To Do
+            Writers Corner&nbsp; 
             <MenuBookOutlinedIcon/>
             </Button>
           </Typography>
@@ -34,7 +34,7 @@ const Nav=()=>{
               color="inherit"
               
             >
-              <Typography>Aravinda  &nbsp;</Typography>
+              <Typography>Login/Signup  &nbsp;</Typography>
               <AccountCircle/>
             </IconButton>
             </Link>

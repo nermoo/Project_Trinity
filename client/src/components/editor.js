@@ -43,7 +43,7 @@ export const Editor = () => {
         modules={modules}
         formats={formats}
       />
-      <div dangerouslySetInnerHTML={{__html: convertedText}}></div>
+      {/* <div dangerouslySetInnerHTML={{__html: convertedText}}></div> */}
     </div>
   );
 };

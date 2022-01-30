@@ -6,6 +6,8 @@ import Footer from './components/footer';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './components/home';
 import Nav from './components/navbar';
+import Editor from './components/blogedit';
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route exact path='/' element={<Home/>}/>
           
       <Route path='/auth' element={<Auth/>}/>
+      <Route path='/editor' element={<Editor/>}/>
 
       </Routes>
       <Footer/>

@@ -33,9 +33,9 @@ export default function LoginForm() {
       <TabContext sx value={value} >
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
           <TabList TabIndicatorProps={{sx: { backgroundColor: 'red',},}} textColor='red' onChange={handleChange} aria-label="lab API tabs example" centered>
-            <Link to="/login">
+            
             <Tab   title="Reader" label="Log in" value="1" />
-            </Link>
+  
             <Tab  title="Writer" label='Sign up' value="2" />
           </TabList>
         </Box>
