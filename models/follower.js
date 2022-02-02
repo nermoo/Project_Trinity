@@ -1,11 +1,11 @@
 const mongoose=require('mongoose');
 
 const followerSchema=new mongoose.Schema({
-    following:{
+    blogger:{
         type:String,
         require:true
     },
-    follower:{
+    reader:{
         type:string,
         requrie:true
     }

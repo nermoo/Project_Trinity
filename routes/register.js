@@ -57,7 +57,7 @@ router.post('/',upload.single("image"),(req,res,next)=>{
             console.log(error);
           }
           else{
-            res.status(200).send(true);
+            res.status(200).send({status:true});
             console.log("success");
             console.log(userStatus);
           }

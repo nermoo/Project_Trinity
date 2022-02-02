@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Nav/>
       <Routes>
-        <Route exact path='/' element={<Home/>}/>
+      <Route exact path='/' element={<Home/>}/>
           
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/editor' element={<Editor/>}/>

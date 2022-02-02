@@ -60,7 +60,10 @@ const Signup=()=>{
         }
         axios.post('/reg',formdata).then(res=>{
 
-          console.log(res);
+          console.log(res.status);
+          if(res.status===200){
+            navigate("/auth");
+          }
           //this should redirected to the authpage.
         })
       } catch (error) {

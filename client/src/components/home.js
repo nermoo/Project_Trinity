@@ -44,7 +44,7 @@ const Home=()=>{
                 </Grid>
             </Grid>
             <Grid item xs={4}>
-                <Card>asdsadasdad</Card>
+                <Card>Component is not developed yet</Card>
             </Grid>
         </Grid>
 
