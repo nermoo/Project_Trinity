@@ -6,7 +6,7 @@ const followerSchema=new mongoose.Schema({
         require:true
     },
     reader:{
-        type:string,
+        type:String,
         requrie:true
     }
 })

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Avatar,Typography,Card } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 
@@ -26,16 +27,20 @@ const ReaderInfobar=()=>{
                     </Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
+                        <Link to='/profile/followers'>
                         <Typography sx={{margin:'auto'}}>
                             Followers &nbsp;&nbsp;
                         {numberOfFollowers}
                         </Typography>
+                        </Link>
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
+                        <Link to='/profile/articles'>
                         <Typography>
                             Articles&nbsp;&nbsp;
                         {numberofArticles}
                         </Typography>
+                        </Link>
                     </Grid>
                 </Grid>
                 </Card>
