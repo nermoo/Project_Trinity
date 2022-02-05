@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Grid } from '@mui/material';
-import Blogcard from './blogcard';
+import Blogcard from '../blog/blogcard';
 import Scroll from 'react-scroll';
 
 

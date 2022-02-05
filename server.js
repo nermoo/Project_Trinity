@@ -51,6 +51,7 @@ var reg = require('./routes/register');
 var login = require('./routes/login');
 var follower=require('./routes/follow');
 var user=require('./routes/followers');
+var blog=require('./routes/post');
 
 
 app.use('/login',login);
@@ -58,6 +59,7 @@ app.use('/',home);
 app.use('/reg',reg);
 app.use('/follow',follower);
 app.use('/user',user);
+app.use('/blog',blog);
 
 
 app.use(express.static('public'));
