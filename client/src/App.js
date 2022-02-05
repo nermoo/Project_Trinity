@@ -1,14 +1,14 @@
 
-import Login from './components/login';
-import Auth from './components/authpage';
-import Followers from './components/followers';
-import Footer from './components/footer';
+import Login from './components/auth/login';
+import Auth from './components/auth/authpage';
+import Followers from './components/blogger/followers';
+import Footer from './components/home/footer';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from './components/home';
-import Nav from './components/navbar';
-import Editor from './components/blogedit';
-import Bprofile from './components/bloggerprofile';
-import Articles from './components/blogcard';
+import Home from './components/home/home';
+import Nav from './components/home/navbar';
+import Editor from './components/blog/blogedit';
+import Bprofile from './components/blogger/bloggerprofile';
+import Articles from './components/blog/blogcard';
 
 
 

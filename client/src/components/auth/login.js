@@ -36,8 +36,13 @@ const Login=()=>{
                 }).then(res=>{
                     console.log(res);
                     const status=res.data.info.status;
-                    const message=res.data.info.message;
+                    const userName=res.data.user;
+                    const id=res.data.id;
                     if(status===true){
+                        console.log(userName);
+                        localStorage.setItem('user',userName);
+                        localStorage.setItem('loginStatus',true);
+                        localStorage.setItem('id',id);
                         navigate("/");
                         // setLe("Logged in");
                     }else{
