@@ -5,6 +5,7 @@ import { Button, Grid, Typography, TextField, FormLabel,Input } from '@mui/mater
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const Blogeditor=()=>{
@@ -14,6 +15,7 @@ const Blogeditor=()=>{
     const post=useSelector(state=>state.postupdate);
     const [title,setTitle]=useState('');
     const [image,setImg]=useState();
+    const navigate = useNavigate();
     console.log(title);
 
     const fileHandle=(e)=>{
@@ -33,6 +35,9 @@ const Blogeditor=()=>{
             formdata.append('bloggerId',bloggerId);
             axios.post('http://localhost:5000/blog/save',formdata).then(res=>{
                     console.log(res);
+                    if(res.status===true){
+                        navigate('/profile');
+                    }
             })
 
         }else{

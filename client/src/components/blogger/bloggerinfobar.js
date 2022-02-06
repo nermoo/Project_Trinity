@@ -28,7 +28,7 @@ const ReaderInfobar=()=>{
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
                         <Link to='/profile/followers'>
-                        <Typography sx={{margin:'auto'}}>
+                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Followers &nbsp;&nbsp;
                         {numberOfFollowers}
                         </Typography>

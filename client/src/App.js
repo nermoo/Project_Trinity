@@ -1,7 +1,6 @@
 
 import Login from './components/auth/login';
 import Auth from './components/auth/authpage';
-import Followers from './components/blogger/followers';
 import Footer from './components/home/footer';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './components/home/home';
@@ -9,6 +8,7 @@ import Nav from './components/home/navbar';
 import Editor from './components/blog/blogedit';
 import Bprofile from './components/blogger/bloggerprofile';
 import Articles from './components/blog/blogcard';
+import Followers from './components/blogger/followers';
 
 
 
@@ -22,8 +22,9 @@ function App() {
           
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/editor' element={<Editor/>}/>
-      <Route path='profile' element={<Bprofile/>}>
-        <Route path='followers' element={<Followers/>}/>
+      <Route path='followers' element={<Followers/>}/>
+      <Route path="profile" element={<Bprofile/>}>
+        <Route path="followers" element={<Followers/>}/>
         <Route path='articles' element={<Articles/>}/>
       </Route>
 
