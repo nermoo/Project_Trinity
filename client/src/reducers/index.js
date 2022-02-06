@@ -6,7 +6,7 @@ import postupdate from './post';
 
 const allReducers= combineReducers({
     tupdate,
-    postupdate
+    postupdate,
 });
 
 

@@ -1,9 +1,16 @@
 
 let tag=[];
-const tagsReducer=(state =tag,action)=>{
-    console.log(action.tags);
-    state=[action.tags]
-    return state;
+const tagsReducer=(state =[],action)=>{
+    console.log(action.payload);
+    switch(action.type){
+        case 'add':
+            state=[];
+            return action.payload;
+
+        default:
+            return state;
+    }
+
 }
 
 export default tagsReducer;

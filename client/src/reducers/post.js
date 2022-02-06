@@ -1,7 +1,12 @@
 let poststr=" ";
 const post=(state=poststr,action)=>{
-    let postString=action.payload;
-    return state;
+    switch(action.type){
+        case 'update':
+            return state=action.payload;
+
+        default:
+            return state;
+    }
 }
 
 export default post;

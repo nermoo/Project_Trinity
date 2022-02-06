@@ -3,14 +3,18 @@ import TextField from '@mui/material/TextField';
 import { Button, Grid, Typography, Chip, Autocomplete } from '@mui/material';
 import { useState, useEffect } from 'react';
 import TagsList from './tagslist';
+import { setTaglist } from '../../actions';
+import { useDispatch } from 'react-redux';
 
 export default function Tags() {
 
     const [tags,setTags]=useState([]);
     const [tag,setTag]=useState();
     const [open, setOpen] = useState(false);
+    const dispatch=useDispatch();
     console.log(tag);
     console.log(tags);
+    dispatch(setTaglist(tags));
 
     const addTag=(e)=>{
         setTags([...tags,tag])
@@ -21,6 +25,7 @@ export default function Tags() {
     }
     const handleDelete = (tagToDelete) => () => {
       setTags((tags) => tags.filter((tag) => tag !== tagToDelete));
+      dispatch(setTaglist(tags));
     };
 
 

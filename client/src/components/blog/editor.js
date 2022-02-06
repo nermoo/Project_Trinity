@@ -33,6 +33,8 @@ import { setPost } from "../../actions";
 
 export const Editor = () => {
   const [convertedText, setConvertedText] = useState("");
+  const dispatch=useDispatch();
+  dispatch(setPost(convertedText));
 
   return (
     <div className="text-editor">

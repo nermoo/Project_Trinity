@@ -10,6 +10,7 @@ export const setTaglist=(tags)=>{
 
 export const setPost=(postString)=>{
     return{
+        type:'update',
         payload:postString
     }
 }
