@@ -38,8 +38,7 @@ export const Editor = () => {
 
   return (
     <div className="text-editor">
-      <p>{convertedText}</p>
-      <EditorToolbar />
+      <EditorToolbar/>
       <ReactQuill
         theme="snow"
         value={convertedText}

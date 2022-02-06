@@ -1,16 +1,46 @@
 const express=require('express');
 const blog=require('./../models/post');
 const router=express.Router();
+const multer=require('multer');
+const path=require('path');
 
 
-router.post('/save',(req,res)=>{
+const DIR = 'public/posts';
+
+// var upload=multer();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        const fileName = Date.now() + path.extname(file.originalname);
+        cb(null,fileName);
+    }
+});
+
+var upload = multer({   //https://morioh.com/p/5c99be0fb5aa here is the link
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+      if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+          cb(null, true);
+      } else {
+          cb(null, false);
+          return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+      }
+  }
+});
+
+
+router.post('/save',upload.single("image"),(req,res)=>{
         let title=req.body.title;
         let post=req.body.post;
-        let id=req.body.authid;
+        let id=req.body.bloggerId;
         let tags=req.body.tags;
         let date=req.body.date;
+        let imageName=req.file.filename;
 
-        const blogPost=new blog({authorid:id, title:title, post:post, date:date, tags:tags});
+        const blogPost=new blog({authorid:id, title:title, post:post, date:date, tags:tags, image:imageName});
         blogPost.save((err,res)=>{
             if(err){
                 console.log(err);
