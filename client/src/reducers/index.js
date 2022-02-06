@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
+import tupdate from './addtags';
+import postupdate from './post';
 
 
 
-const allReducer= combineReducers({
-    
+const allReducers= combineReducers({
+    tupdate,
+    postupdate
 });
 
 
-export default allReducer;
+export default allReducers;

@@ -14,8 +14,7 @@ var myStore=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && windo
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={myStore}>
-
-    <App />
+    <App/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

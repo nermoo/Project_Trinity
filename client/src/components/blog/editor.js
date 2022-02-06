@@ -27,10 +27,13 @@ import React from "react";
 import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "./quilltoolbar";
 import "react-quill/dist/quill.snow.css";
+import { useDispatch } from "react-redux";
+import { setPost } from "../../actions";
 // import "./styles.css";
 
 export const Editor = () => {
   const [convertedText, setConvertedText] = useState("");
+
   return (
     <div className="text-editor">
       <p>{convertedText}</p>

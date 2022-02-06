@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Grid, Typography, Chip, Autocomplete } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TagsList from './tagslist';
 
 export default function Tags() {
@@ -22,6 +22,7 @@ export default function Tags() {
     const handleDelete = (tagToDelete) => () => {
       setTags((tags) => tags.filter((tag) => tag !== tagToDelete));
     };
+
 
 
 
