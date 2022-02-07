@@ -31,13 +31,21 @@ const CoverImage=styled(CardMedia,{
 export default function BlogCard(props) {
 
 
-    const [response,setRes]=useState('');
-    console.log(response);
+    const [postres,setRes]=useState('');
+    const [authres,setAuth]=useState('');
+    const [tags,setTags]=useState([]);
+    console.log(postres);
     const id='61ffe552cd063de425108663';
     const fetchData=async ()=>{
         axios.post('http://localhost:5000/blog/post',{id:id}).then(res=>{
-            setRes(res.data);
+            console.log(res.data.post);
+            setRes(res.data.post);
+            setTags(res.data.tags);
+            axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
+                setAuth(Ares.data)
+            })
         })
+    
     }
 
     // const image='/IMG_5822.jpg';
@@ -51,11 +59,12 @@ export default function BlogCard(props) {
         fetchData();    
     },[]);
     const months=['January','February','March','April','May','June','July','August','September','Octomber','November','December'];
-    const image='http://localhost:5000/posts/'+response.image;
-    const title=response.title;
-    const userName="Aravinda kolitha Nawarathna";
-    const date="nov 12";
-    const tags=['Javascript','React','Redux'];
+    const image='http://localhost:5000/posts/'+postres.image;
+    const title=postres.title;
+    const userName=authres.name;
+    const date="Nov 12";
+    const profilepic='http://localhost:5000/'+authres.image;
+    console.log(tags);
   return (
       <Grid container spacing={2}  sx={{marginTop:'10px'}}>
           {/* <Grid item xs={1}></Grid> */}
@@ -65,7 +74,7 @@ export default function BlogCard(props) {
               <Grid container>
                   <Grid item xs={8}>
                   <Grid container sx={{paddingTop:'10px',paddingLeft:'16px'}}>
-                      <Avatar src="https://picsum.photos/200/300"/>
+                      <Avatar src={profilepic}/>
                       <Typography sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>{userName}</Typography>
                   </Grid>
                       <CardContent>

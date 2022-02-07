@@ -1,5 +1,6 @@
 const express=require('express');
 const blog=require('./../models/post');
+const user=require('./../models/user');
 const router=express.Router();
 const multer=require('multer');
 const path=require('path');
@@ -62,9 +63,25 @@ router.post('/post',(req,res)=>{
 
         }else{
             console.log(post);
-            res.send(post);//destructure the res and send
+            const tags=post.tags.split(',');
+            console.log(tags);
+            res.send({post,tags});//destructure the res and send
         }
     })
+
+})
+
+router.post('/author',(req,res)=>{
+    let authid=req.body.id;
+    console.log(authid);
+    user.findById(authid, function (err, auth) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            res.send({name:auth.name,image:auth.profilePic});
+        }
+    });
 
 })
 
