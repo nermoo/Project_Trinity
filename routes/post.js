@@ -37,10 +37,12 @@ router.post('/save',upload.single("image"),(req,res)=>{
         let post=req.body.post;
         let id=req.body.bloggerId;
         let tags=req.body.tags;
-        let date=req.body.date;
+        let today=new Date();
+        let day=today.getDate();
+        let month=today.getMonth();
         let imageName=req.file.filename;
 
-        const blogPost=new blog({authorid:id, title:title, post:post, date:date, tags:tags, image:imageName});
+        const blogPost=new blog({authorid:id, title:title, post:post, day:day, month:month, tags:tags, image:imageName});
         blogPost.save((err,res)=>{
             if(err){
                 console.log(err);
@@ -51,7 +53,18 @@ router.post('/save',upload.single("image"),(req,res)=>{
         })
 })
 
-router.get('/:id',(req,res)=>{
+router.post('/post',(req,res)=>{
+    let postid=req.body.id;
+    console.log(postid);
+    blog.findById(postid,function(err,post){
+        if(err){
+            console.log(err);
+
+        }else{
+            console.log(post);
+            res.send(post);//destructure the res and send
+        }
+    })
 
 })
 

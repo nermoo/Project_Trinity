@@ -13,7 +13,11 @@ const blogSchema=new mongoose.Schema({
         type:String,
         require:true
     },
-    date:{
+    day:{
+        type:String,
+        require:true
+    },
+    month:{
         type:String,
         require:true
     },

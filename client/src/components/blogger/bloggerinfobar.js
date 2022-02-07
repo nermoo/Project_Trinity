@@ -36,7 +36,7 @@ const ReaderInfobar=()=>{
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
                         <Link to='/profile/articles'>
-                        <Typography>
+                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Articles&nbsp;&nbsp;
                         {numberofArticles}
                         </Typography>
