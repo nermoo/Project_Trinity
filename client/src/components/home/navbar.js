@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -6,9 +6,13 @@ import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import { Link } from 'react-router-dom';
 
 
-
 const Nav=()=>{
 
+  const [prof,setProf]=useState(false);
+  const loginStatus=localStorage.getItem('loginStatus');
+  useEffect(()=>{
+    setProf(loginStatus);
+  },[loginStatus]);
 
     return(
         <AppBar sx={{marginBottom:'20px', backgroundColor:'#E85A4F'}} position="static">

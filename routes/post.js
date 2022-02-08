@@ -4,6 +4,7 @@ const user=require('./../models/user');
 const router=express.Router();
 const multer=require('multer');
 const path=require('path');
+const { convert } = require('html-to-text');
 
 
 const DIR = 'public/posts';
@@ -63,9 +64,11 @@ router.post('/post',(req,res)=>{
 
         }else{
             console.log(post);
+            const content = convert(post.post,{wordwrap: 130});
+            console.log(content);
             const tags=post.tags.split(',');
             console.log(tags);
-            res.send({post,tags});//destructure the res and send
+            res.send({post,tags,content});//destructure the res and send
         }
     })
 
