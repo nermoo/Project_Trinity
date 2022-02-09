@@ -4,7 +4,8 @@ import { useEffect,useRef,useState } from 'react';
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions';
 
 
 
@@ -19,6 +20,7 @@ const Login=()=>{
     const [loginEr,setLe]=useState('');
     const [Errors,setErr]=useState({});
     let navigate = useNavigate();
+    const dispatch=useDispatch();
 
 
     const validate=()=>{
@@ -43,6 +45,8 @@ const Login=()=>{
                         localStorage.setItem('user',userName);
                         localStorage.setItem('loginStatus',true);
                         localStorage.setItem('id',id);
+                        //dispatch an action to and catch from navbar.
+                        dispatch(login());
                         navigate("/");
                         // setLe("Logged in");
                     }else{
@@ -61,12 +65,6 @@ const Login=()=>{
         setErr(validate);
     }
 
-    const handleLogin=()=>{
-        
-        
-            
-    
-    }
 
 
     return(

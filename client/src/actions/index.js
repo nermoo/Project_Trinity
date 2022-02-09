@@ -14,3 +14,9 @@ export const setPost=(postString)=>{
         payload:postString
     }
 }
+
+export const login=()=>{
+    return{
+        type:'login'
+    }
+}
