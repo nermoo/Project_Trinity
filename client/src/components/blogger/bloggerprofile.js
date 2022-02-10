@@ -27,7 +27,7 @@ const BloggerP=()=>{
     return(
         <div>
         <Grid container>
-            <Infobar/>
+            <Infobar articles={ids.length} id={id}/>
         </Grid>
         <Grid container>
                 

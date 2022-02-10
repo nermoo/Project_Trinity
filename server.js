@@ -52,6 +52,7 @@ var login = require('./routes/login');
 var follower=require('./routes/follow');
 var user=require('./routes/followers');
 var blog=require('./routes/post');
+var profile=require('./routes/profile');
 
 
 app.use('/login',login);
@@ -60,6 +61,7 @@ app.use('/reg',reg);
 app.use('/follow',follower);
 app.use('/user',user);
 app.use('/blog',blog);
+app.use('/profile',profile);
 
 
 app.use(express.static('public'));

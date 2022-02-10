@@ -1,15 +1,28 @@
-import React from 'react';
+import React,{ useEffect,useState } from 'react';
 import { Grid, Avatar,Typography,Card } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
+const BloggerInfobar=(props)=>{
 
-const ReaderInfobar=()=>{
-
-    const name="Aravinda Kolitha Nawarathna ";
-    const profilePhoto='https://picsum.photos/200/300';
+    const [blogger,setBlogger]=useState({});
+    console.log(blogger);
+    const name=blogger.name;
+    const profilePhoto='http://localhost:5000/'+blogger.profilePic;
     const numberOfFollowers=12;
-    const numberofArticles=3;
+    const numberofArticles=props.articles;
+    const id=props.id;
+
+    const fetchData=()=>{
+        axios.post('/profile/blogger',{id:id}).then(res=>{
+            setBlogger(res.data);
+        })
+    }
+
+    useEffect(()=>{
+        fetchData()
+    },[])
 
     return(
         <Grid container>
@@ -53,4 +66,4 @@ const ReaderInfobar=()=>{
 }
 
 
-export default ReaderInfobar;
+export default BloggerInfobar;

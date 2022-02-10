@@ -12,6 +12,7 @@ const Articles =(props)=>{
 
 
     const Element=Scroll.Element;
+    const months=['January','February','March','April','May','June','July','August','September','Octomber','November','December'];
     const Articles=props.List;
     const comments=12;
     const upvotes=78;
@@ -45,7 +46,7 @@ const Articles =(props)=>{
                             {article.title}
                         </Typography>
                         <Typography sx={{color:'gray', fontSize:'14px',margin:'10px'}} >
-                            Published on 15/11/21
+                            Published on {months[article.month]}&nbsp; {article.day}
                         </Typography>
                         </Grid>
                         <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={1}>

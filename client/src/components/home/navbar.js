@@ -37,7 +37,7 @@ const Nav=()=>{
           <Link to="/">
           <Typography>
             <Button>
-            Writers Corner&nbsp; 
+            Blog Corner&nbsp; 
             <MenuBookOutlinedIcon/>
             </Button>
           </Typography>
