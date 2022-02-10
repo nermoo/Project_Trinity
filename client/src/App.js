@@ -7,7 +7,7 @@ import Home from './components/home/home';
 import Nav from './components/home/navbar';
 import Editor from './components/blog/blogedit';
 import Bprofile from './components/blogger/bloggerprofile';
-import Articles from './components/blog/blogcard';
+import Articles from './components/blog/articles';
 import Followers from './components/blogger/followers';
 
 

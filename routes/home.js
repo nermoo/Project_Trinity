@@ -21,6 +21,21 @@ router.get('/', async (req,res)=>{
    
 })
 
+router.post('/',(req,res)=>{
+    let id=req.body.id;
+    posts.find({authorid:id},{authorid:0,post:0,tags:0,image:0,__v:0},function(err,docs){
+        if(err){
+            console.log(err);
+        }else{
+            var list=[];
+            docs.map(data=>{
+                list.push(data);
+             })
+            res.send(list);
+        }
+    })
+})
+
 // router.get('/about',(req,res)=>{
 //     res.send("hello from about");
 // })
