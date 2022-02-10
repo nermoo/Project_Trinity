@@ -35,7 +35,7 @@ export default function BlogCard(props) {
     const [authres,setAuth]=useState('');
     const [tags,setTags]=useState([]);
     const [content,setContent]=useState('');
-    const id='62015687ace55c9d2da5bf94';
+    const id=props.id;
     const fetchData=async ()=>{
         axios.post('http://localhost:5000/blog/post',{id:id}).then(res=>{
             
@@ -108,7 +108,7 @@ export default function BlogCard(props) {
                       component="img"
                       height="150"
                       image={image}
-                      alt="green iguana"
+                      alt={title}
                       ></CoverImage>
                       </Grid>   
               </Grid>

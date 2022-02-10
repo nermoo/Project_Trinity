@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 
 const BloggerP=()=>{
 
+    //get the bloggerid from the localstorage and send dat to the node app and get an list of post id from the database
     return(
         <div>
         <Grid container>

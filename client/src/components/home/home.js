@@ -1,14 +1,27 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Card, Grid } from '@mui/material';
 import Blogcard from '../blog/blogcard';
 import Scroll from 'react-scroll';
+import axios from 'axios';
 
 
 
 const Home=()=>{
 
     const Element=Scroll.Element;
-    let innerHeight=window.innerHeight;
+    // let innerHeight=window.innerHeight;
+    const [ids,setIds]=useState([]);
+
+    const fetchData=()=>{
+        axios.get('http://localhost:5000/').then(res=>{
+            setIds(res.data)
+        })
+    }
+    console.log(ids);
+
+    useEffect(()=>{
+        fetchData();
+    },[]);
 
     return(
         <Grid container>
@@ -18,7 +31,7 @@ const Home=()=>{
                     <Grid item xs={10}>
                     <Element  className="element" id="containerElement" style={{
           position: 'relative',
-          height:'660px',
+          height:'600px',
           overflow: 'scroll',
           overflowX:'hidden',
           scrollbarWidth:'none'
@@ -26,18 +39,9 @@ const Home=()=>{
 
           
         }}>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
-                <Blogcard/>
+                {ids.map(id=>{
+                    return <Blogcard id={id}/>
+                })}
         </Element>
                     </Grid>
                     <Grid item xs={1}></Grid>
