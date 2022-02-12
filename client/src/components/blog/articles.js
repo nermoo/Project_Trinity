@@ -23,7 +23,7 @@ const Articles =(props)=>{
             <Grid item xs={8}>
             <Element  className="element" id="containerElement" style={{
           position: 'relative',
-          height:'500px',
+          height:'460px',
           overflow: 'scroll',
           overflowX:'hidden',
           scrollbarWidth:'none'

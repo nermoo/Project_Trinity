@@ -5,7 +5,7 @@ const logstatus=(state=false,action)=>{
             return state=!state;
 
         default:
-            return state;
+            return !state;
     }
 }
 

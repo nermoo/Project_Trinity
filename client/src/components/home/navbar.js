@@ -10,24 +10,29 @@ import { useSelector } from 'react-redux';
 const Nav=()=>{
 
   const [prof,setProf]=useState(false);
-  const loginStatus=localStorage.getItem('loginStatus');
+  
   const user=localStorage.getItem('user');
-  const [link,setLink]=useState('/auth');
-  const [comp,setComp]=useState('Login/Signup');
-  const logStatus=useSelector(state=>state.logstatus);
+  const [link,setLink]=useState('');
+  const [comp,setComp]=useState('');
+  const logStatus=useSelector(state=>state.logstatus); 
+  console.log(logStatus,comp);
 
-  console.log(logStatus);
   
   useEffect(()=>{
+    const loginStatus=localStorage.getItem('loginStatus');
     if(loginStatus){
       console.log("im here");
       setProf(true);
       setLink('/profile');
       setComp('Hi '+user);
+    }else{
+      setProf(false);
+      setLink('/auth');
+      setComp('Login/Signup');
     }
    
     
-  },[loginStatus]);
+  },[logStatus]);
 
   
 
