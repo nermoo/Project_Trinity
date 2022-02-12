@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Logout from './../auth/logout';
 import { useNavigate } from 'react-router-dom';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 
 
@@ -48,13 +49,14 @@ const BloggerP=()=>{
                     <Card sx={{padding:'5px',marginTop:'10px'}}>
                         <Grid container>
                             
-                        <Grid item xs={3}>
+                        <Grid item sx={{textAlign:'center'}} xs={3}>
                         <Button onClick={newBlog}>
+                            <DriveFileRenameOutlineIcon/> &nbsp;
                             New blog
                         </Button>
                             </Grid>
                         <Grid item xs={6}></Grid>
-                        <Grid item xs={3}>
+                        <Grid sx={{textAlign:'center'}} item xs={3}>
                             <Logout/>
                         </Grid>
                         

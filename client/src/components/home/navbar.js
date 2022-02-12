@@ -15,13 +15,11 @@ const Nav=()=>{
   const [link,setLink]=useState('');
   const [comp,setComp]=useState('');
   const logStatus=useSelector(state=>state.logstatus); 
-  console.log(logStatus,comp);
 
   
   useEffect(()=>{
     const loginStatus=localStorage.getItem('loginStatus');
     if(loginStatus){
-      console.log("im here");
       setProf(true);
       setLink('/profile');
       setComp('Hi '+user);
