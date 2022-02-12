@@ -30,19 +30,19 @@ const Home=()=>{
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
                     <Element  className="element" id="containerElement" style={{
-          position: 'relative',
-          height:'600px',
-          overflow: 'scroll',
-          overflowX:'hidden',
-          scrollbarWidth:'none'
-          
+                        position: 'relative',
+                        height:'600px',
+                        overflow: 'scroll',
+                        overflowX:'hidden',
+                        scrollbarWidth:'none'
+                        
 
-          
-        }}>
-                {ids.map(id=>{
-                    return <Blogcard id={id}/>
-                })}
-        </Element>
+                        
+                        }}>
+                        {ids.map(id=>{
+                            return <Blogcard id={id}/>
+                        })}
+                    </Element>
                     </Grid>
                     <Grid item xs={1}></Grid>
                 </Grid>

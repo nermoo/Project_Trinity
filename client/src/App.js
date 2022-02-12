@@ -9,6 +9,7 @@ import Editor from './components/blog/blogedit';
 import Bprofile from './components/blogger/bloggerprofile';
 import Articles from './components/blog/articles';
 import Followers from './components/blogger/followers';
+import Blogcon from './components/blog/blogcontent'
 
 
 
@@ -17,6 +18,7 @@ function App() {
     <div className="App">
       <Router>
         <Nav/>
+        <Blogcon/>
       <Routes>
       <Route exact path='/' element={<Home/>}/>
           
