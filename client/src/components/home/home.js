@@ -3,6 +3,8 @@ import { Card, Grid } from '@mui/material';
 import Blogcard from '../blog/blogcard';
 import Scroll from 'react-scroll';
 import axios from 'axios';
+import Blogcon from './../blog/blogcontent';
+import { Route,Routes } from 'react-router-dom';
 
 
 
@@ -49,6 +51,7 @@ const Home=()=>{
             </Grid>
             <Grid item xs={4}>
                 <Card>Component is not developed yet</Card>
+                {/* <Route path=':id' element={<Blogcon/>}/> */} methna routes walin ghnda one gema
             </Grid>
         </Grid>
 

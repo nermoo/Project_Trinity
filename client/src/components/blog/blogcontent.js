@@ -4,9 +4,34 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions,Grid } from '@mui/material';
+import { useEffect,useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 export default function MultiActionAreaCard(props) {
+
+  const params=useParams();
+  const id=params.id;
+  const [postres,setRes]=useState('');
+  const [authres,setAuth]=useState('');
+  const [tags,setTags]=useState([]);
+  const cover='http://localhost:5000/posts/'+postres.image;
+  const fetchData=async ()=>{
+        axios.post('http://localhost:5000/blog/content',{id:id}).then(res=>{
+            
+            setRes(res.data.post);
+            setTags(res.data.tags);
+            axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
+                setAuth(Ares.data)
+            })
+        })
     
+    }
+
+  useEffect(()=>{
+    fetchData();
+  },[])
 
   return (
       <Grid container>
@@ -15,19 +40,19 @@ export default function MultiActionAreaCard(props) {
 
     <Card>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="240"
-          image="https://picsum.photos/200/300"
-          alt="green iguana"
-        />
+        
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {postres.title}
           </Typography>
+          <CardMedia
+          component="img"
+          height="240"
+          image={cover}
+          alt={postres.title}
+        />
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {parse(`${postres.post}`)}
           </Typography>
         </CardContent>
       </CardActionArea>

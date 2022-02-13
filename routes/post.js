@@ -74,6 +74,21 @@ router.post('/post',(req,res)=>{
 
 })
 
+router.post('/content',(req,res)=>{
+    let postid=req.body.id;
+    console.log(postid);
+    blog.findById(postid,function(err,post){
+        if(err){
+            console.log(err);
+
+        }else{
+            const tags=post.tags.split(',');
+            console.log(tags);
+            res.send({post,tags});
+        }
+    })
+})
+
 router.post('/author',(req,res)=>{
     let authid=req.body.id;
     console.log(authid);

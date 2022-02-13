@@ -9,7 +9,7 @@ import Editor from './components/blog/blogedit';
 import Bprofile from './components/blogger/bloggerprofile';
 import Articles from './components/blog/articles';
 import Followers from './components/blogger/followers';
-import Blogcon from './components/blog/blogcontent'
+import Blogcon from './components/blog/blogcontent';
 
 
 
@@ -18,13 +18,14 @@ function App() {
     <div className="App">
       <Router>
         <Nav/>
-        <Blogcon/>
       <Routes>
-      <Route exact path='/' element={<Home/>}/>
-          
+      <Route exact path='/' element={<Home/>}/>          
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/editor' element={<Editor/>}/>
       <Route path='followers' element={<Followers/>}/>
+      <Route path='posts'>
+          <Route path=':id' element={<Blogcon/>}/>
+      </Route>
       <Route path="profile" element={<Bprofile/>}>
         <Route path="followers" element={<Followers/>}/>
         <Route path='articles' element={<Articles/>}/>

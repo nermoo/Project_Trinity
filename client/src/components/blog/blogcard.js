@@ -9,6 +9,7 @@ import { styled } from '@mui/system';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import axios from 'axios';
 import { useEffect, useState } from 'react'; 
+import { Link } from 'react-router-dom';
 
 
 const Title=styled(Typography,{
@@ -76,9 +77,11 @@ export default function BlogCard(props) {
                       <Typography sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>{userName}</Typography>
                   </Grid>
                       <CardContent>
-                        <Title sx={{color:'black'}}>
-                            {title}
-                        </Title>
+                          <Link to={`/posts/${id}`}>
+                            <Title sx={{color:'black'}}>
+                                {title}
+                            </Title>
+                          </Link>
                         <Typography>
                         {content} 
                         </Typography>
