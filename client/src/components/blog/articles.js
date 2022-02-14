@@ -3,6 +3,7 @@ import { Grid, Card, Avatar, Typography } from '@mui/material';
 import Scroll from 'react-scroll';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { Link } from 'react-router-dom';
 
 
 
@@ -42,9 +43,11 @@ const Articles =(props)=>{
                     <Card sx={{marginBottom:'10px',marginTop:'10px'}} variant='outlined'>
                     <Grid container>
                         <Grid item xs={8}>
-                        <Typography sx={{margin:'10px',fontSize:{}}}>
-                            {article.title}
-                        </Typography>
+                            <Link to={`/posts/${article._id}`} style={{textDecoration:'none'}}>
+                            <Typography underline='none' sx={{margin:'10px',fontSize:{},color:'black',textDecoration:'none'}}>
+                                {article.title}
+                            </Typography>
+                            </Link>
                         <Typography sx={{color:'gray', fontSize:'14px',margin:'10px'}} >
                             Published on {months[article.month]}&nbsp; {article.day}
                         </Typography>

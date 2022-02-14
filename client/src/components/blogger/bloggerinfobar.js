@@ -40,7 +40,7 @@ const BloggerInfobar=(props)=>{
                     </Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
-                        <Link to='/profile/followers'>
+                        <Link to='/profile/followers' style={{textDecoration:'none'}}>
                         <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Followers &nbsp;&nbsp;
                         {numberOfFollowers}
@@ -48,7 +48,7 @@ const BloggerInfobar=(props)=>{
                         </Link>
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
-                        <Link to='/profile/articles'>
+                        <Link to='/profile/articles' style={{textDecoration:'none'}}>
                         <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Articles&nbsp;&nbsp;
                         {numberofArticles}

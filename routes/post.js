@@ -50,7 +50,7 @@ router.post('/save',upload.single("image"),(req,res)=>{
                 console.log(err);
             }else{
                 console.log(res);
-                res.status(200).send({status:true});
+                res.send({status:true});
             }
         })
 })

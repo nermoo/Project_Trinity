@@ -77,12 +77,12 @@ export default function BlogCard(props) {
                       <Typography sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>{userName}</Typography>
                   </Grid>
                       <CardContent>
-                          <Link to={`/posts/${id}`}>
+                          <Link to={`/posts/${id}`} style={{textDecoration:'none'}}>
                             <Title sx={{color:'black'}}>
                                 {title}
                             </Title>
                           </Link>
-                        <Typography>
+                        <Typography sx={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
                         {content} 
                         </Typography>
                       </CardContent>
