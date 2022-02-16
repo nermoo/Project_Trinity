@@ -40,12 +40,13 @@ const Login=()=>{
                     const status=res.data.info.status;
                     const userName=res.data.user;
                     const id=res.data.id;
+                    const role=res.data.role;
                     if(status===true){
                         console.log(userName);
                         localStorage.setItem('user',userName);
                         localStorage.setItem('loginStatus',true);
                         localStorage.setItem('id',id);
-                        //dispatch an action to and catch from navbar.
+                        localStorage.setItem('role',role);
                         dispatch(login());
                         navigate("/");
                         // setLe("Logged in");

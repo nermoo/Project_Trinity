@@ -47,7 +47,7 @@ passport.use(new localStrategy(
         req.login(user,(err)=>{
           console.log(user);
           if(err) console.log(err); 
-          res.send({user:user.name,info:info,id:user._id});    //sending status to the frontend
+          res.send({user:user.name,info:info,id:user._id,role:user.role});    //sending status to the frontend
           console.log(info.status);
         })
       }

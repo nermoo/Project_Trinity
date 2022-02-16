@@ -34,5 +34,20 @@ export default[
     {
         id:9,
         Name:'Gatsby'
+    },{
+        id:10,
+        Name:'Angular'
+    },{
+        id:11,
+        Name:'Nextjs'
+    },{
+        id:12,
+        Name:'Spring boot'
+    },{
+        id:13,
+        Name:'Expressjs'
+    },{
+        id:14,
+        Name:'Fundamentals'
     }
 ];

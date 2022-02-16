@@ -45,11 +45,11 @@ router.post('/save',upload.single("image"),(req,res)=>{
         let imageName=req.file.filename;
 
         const blogPost=new blog({authorid:id, title:title, post:post, day:day, month:month, tags:tags, image:imageName});
-        blogPost.save((err,res)=>{
+        blogPost.save((err,response)=>{
             if(err){
                 console.log(err);
             }else{
-                console.log(res);
+                console.log(response);
                 res.send({status:true});
             }
         })

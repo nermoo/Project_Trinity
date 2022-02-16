@@ -10,6 +10,7 @@ import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import axios from 'axios';
 import { useEffect, useState } from 'react'; 
 import { Link } from 'react-router-dom';
+import Follow from './../reader/follow';
 
 
 const Title=styled(Typography,{
@@ -36,13 +37,15 @@ export default function BlogCard(props) {
     const [authres,setAuth]=useState('');
     const [tags,setTags]=useState([]);
     const [content,setContent]=useState('');
+    const [authid,setAuthid]=useState('');
     const id=props.id;
     const fetchData=async ()=>{
         axios.post('http://localhost:5000/blog/post',{id:id}).then(res=>{
             
             setRes(res.data.post);
             setTags(res.data.tags);
-            setContent(res.data.content)
+            setContent(res.data.content);
+            setAuthid(res.data.post.authorid);
             axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
                 setAuth(Ares.data)
             })
@@ -73,8 +76,15 @@ export default function BlogCard(props) {
               <Grid container>
                   <Grid item xs={8}>
                   <Grid container sx={{paddingTop:'10px',paddingLeft:'16px'}}>
+                      <Grid item xs={1}>
                       <Avatar src={profilepic}/>
-                      <Typography sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>{userName}</Typography>
+                      </Grid>
+                      <Grid item xs={6} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>
+                      <Typography >{userName}</Typography>
+                      </Grid>
+                      <Grid item xs={4}>
+                      <Follow id={authid}/>
+                      </Grid>
                   </Grid>
                       <CardContent>
                           <Link to={`/posts/${id}`} style={{textDecoration:'none'}}>
