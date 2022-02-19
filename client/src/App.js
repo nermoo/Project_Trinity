@@ -10,6 +10,7 @@ import Bprofile from './components/blogger/bloggerprofile';
 import Articles from './components/blog/articles';
 import Followers from './components/blogger/followers';
 import Blogcon from './components/blog/blogcontent';
+import Rprofile from './components/reader/readerProfile';
 
 
 
@@ -26,9 +27,16 @@ function App() {
       <Route path='posts'>
           <Route path=':id' element={<Blogcon/>}/>
       </Route>
-      <Route path="profile" element={<Bprofile/>}>
-        <Route path="followers" element={<Followers/>}/>
-        <Route path='articles' element={<Articles/>}/>
+      <Route path="profile">
+        <Route path='blogger'>
+          <Route path=':name' element={<Bprofile/>}>
+            <Route path="followers" element={<Followers/>}/>
+            <Route path='articles' element={<Articles/>}/>
+          </Route>
+        </Route>
+        <Route path='user'>
+          <Route path=':name' element={<Rprofile/>}></Route>
+        </Route>
       </Route>
 
       </Routes>

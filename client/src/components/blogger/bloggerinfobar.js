@@ -7,7 +7,6 @@ import axios from 'axios';
 const BloggerInfobar=(props)=>{
 
     const [blogger,setBlogger]=useState({});
-    console.log(blogger);
     const name=blogger.name;
     const profilePhoto='http://localhost:5000/'+blogger.profilePic;
     const numberOfFollowers=12;
@@ -15,7 +14,7 @@ const BloggerInfobar=(props)=>{
     const id=props.id;
 
     const fetchData=()=>{
-        axios.post('/profile/blogger',{id:id}).then(res=>{
+        axios.post('/profile/user',{id:id}).then(res=>{
             setBlogger(res.data);
         })
     }

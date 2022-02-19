@@ -19,9 +19,15 @@ const Nav=()=>{
   
   useEffect(()=>{
     const loginStatus=localStorage.getItem('loginStatus');
+    const name=localStorage.getItem('user');
+    const role=localStorage.getItem('role');
     if(loginStatus){
+      if(role==='writer'){
+        setLink(`/profile/blogger/${name}/followers`);
+      }else{
+        setLink(`/profile/user/${name}/`);
+      }
       setProf(true);
-      setLink('/profile');
       setComp('Hi '+user);
     }else{
       setProf(false);

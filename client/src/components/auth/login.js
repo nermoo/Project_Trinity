@@ -92,9 +92,9 @@ const Login=()=>{
                           <Button onClick={handleLog}>Login</Button>
                            </Grid> 
                        <Grid item xs={2}></Grid> 
-                       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                       {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                            <Alert onClose={handleClose} severity="success"> yoooo wassup</Alert>
-                       </Snackbar>
+                       </Snackbar> */}
                        <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>
                            <Alert onClose={handleClose} severity="error"> Incorrect Username or Password</Alert>
                        </Snackbar>
