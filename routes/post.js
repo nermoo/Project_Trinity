@@ -1,6 +1,7 @@
 const express=require('express');
 const blog=require('./../models/post');
 const user=require('./../models/user');
+const savedItem=require('./../models/savedItem');
 const router=express.Router();
 const multer=require('multer');
 const path=require('path');
@@ -101,6 +102,19 @@ router.post('/author',(req,res)=>{
         }
     });
 
+})
+
+router.post('/saved',(req,res)=>{
+    const ids=req.body;
+    console.log(ids);
+    const item=new savedItem({postId:ids.postid, userId:ids.userid});
+    item.save((err,response)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send(response);
+        }
+    })
 })
 
 

@@ -40,29 +40,21 @@ const BloggerP=()=>{
             <Route path='/followers' element={<Followers/>}/>
             <Route path='/articles' element={<Articles List={ids}/>}/>
             </Routes>
-            </Grid>
+            </Grid> */}
             <Grid container>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={10}>
                     <Card sx={{padding:'5px',marginTop:'10px'}}>
                         <Grid container>
-                            
-                        <Grid item sx={{textAlign:'center'}} xs={3}>
-                        <Button onClick={newBlog}>
-                            <DriveFileRenameOutlineIcon/> &nbsp;
-                            New blog
-                        </Button>
-                            </Grid>
-                        <Grid item xs={6}></Grid>
+                        <Grid item xs={9}></Grid>
                         <Grid sx={{textAlign:'center'}} item xs={3}>
                             <Logout/>
                         </Grid>
-                        
                         </Grid>
                     </Card>
                 </Grid>
                 <Grid item xs={1}></Grid>
-            </Grid> */}
+            </Grid>
         </div>
         
     );

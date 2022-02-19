@@ -23,6 +23,7 @@ const BloggerP=()=>{
     }
     const fetchData=()=>{
         axios.post('http://localhost:5000/',{id:id}).then(res=>{
+            console.log(res.data);
             setIds(res.data);
         })
     }

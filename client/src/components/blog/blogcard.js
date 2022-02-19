@@ -4,7 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, CardMedia, Chip, Grid } from '@mui/material';
+import { Avatar, CardMedia, Chip, Grid, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import axios from 'axios';
@@ -66,6 +66,13 @@ export default function BlogCard(props) {
     const month=months[postres.month];
     const date=day+" "+month;
     const profilepic='http://localhost:5000/'+authres.image;
+
+    const addBookmark=()=>{
+        const user=localStorage.getItem('id');
+        axios.post('http://localhost:5000/blog/saved',{userid:user,postid:id}).then(res=>{
+            console.log(res.data);
+        })
+    }
     
   return (
       <Grid container spacing={2}  sx={{marginTop:'10px'}}>
@@ -103,13 +110,15 @@ export default function BlogCard(props) {
                               </Grid>
                               
                               {tags.map((tag)=>(
-                                  <Grid item sx={{paddingRight:'10px'}}>
+                                  <Grid item sx={{marginTop:'auto',marginBottom:'auto', paddingRight:'5px'}}>
                                       <Chip label={tag}></Chip>
                                   </Grid>
                                
                               ))}
-                              <Grid item>
-                                <BookmarkAddOutlinedIcon/>
+                              <Grid item sx={{marginTop:'auto',marginBottom:'auto'}}>
+                                  <IconButton onClick={addBookmark}>
+                                    <BookmarkAddOutlinedIcon />
+                                  </IconButton>
                               </Grid>
                               
                           </Grid>
