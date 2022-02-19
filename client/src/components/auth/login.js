@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, TextField, Button, Typography} from '@mui/material';
+import {Grid, TextField, Button, Typography,Snackbar,Alert} from '@mui/material';
 import { useEffect,useRef,useState } from 'react';
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
@@ -19,8 +19,12 @@ const Login=()=>{
     const [password,setPass]=useState('');
     const [loginEr,setLe]=useState('');
     const [Errors,setErr]=useState({});
+    const [open, setOpen] = useState(false);
+    const [warning, setwar] = useState(false);
     let navigate = useNavigate();
     const dispatch=useDispatch();
+    const vertical='top';
+    const horizontal='center';
 
 
     const validate=()=>{
@@ -48,10 +52,11 @@ const Login=()=>{
                         localStorage.setItem('id',id);
                         localStorage.setItem('role',role);
                         dispatch(login());
+                        setOpen(true);
                         navigate("/");
                         // setLe("Logged in");
                     }else{
-                       setLe("Username or password do not match");
+                        setwar(true);
                     }
                     
                 })
@@ -66,6 +71,15 @@ const Login=()=>{
         setErr(validate);
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+        setwar(false);
+      };
+
 
 
     return(
@@ -78,7 +92,13 @@ const Login=()=>{
                           <Button onClick={handleLog}>Login</Button>
                            </Grid> 
                        <Grid item xs={2}></Grid> 
-
+                       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                           <Alert onClose={handleClose} severity="success"> yoooo wassup</Alert>
+                       </Snackbar>
+                       <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>
+                           <Alert onClose={handleClose} severity="error"> Incorrect Username or Password</Alert>
+                       </Snackbar>
+                    
                        
                     </Grid>
     );

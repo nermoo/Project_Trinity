@@ -36,7 +36,7 @@ const Blogeditor=()=>{
             axios.post('http://localhost:5000/blog/save',formdata).then(res=>{
                     console.log(res.data);
                     if(res.data.status===true){
-                        navigate('/articles');
+                        navigate('/profile/articles');
                     }else{
                         console.log('something went wrong');
                     }
