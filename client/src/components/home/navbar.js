@@ -41,7 +41,7 @@ const Nav=()=>{
   
 
     return(
-        <AppBar sx={{marginBottom:'20px', backgroundColor:'#E85A4F'}} position="static">
+        <AppBar sx={{marginBottom:'20px', backgroundColor:'#E85A4F'}} position="sticky">
         <Toolbar>
           <Link to="/">
           <Typography>

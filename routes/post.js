@@ -111,8 +111,9 @@ router.post('/saved',(req,res)=>{
     item.save((err,response)=>{
         if(err){
             console.log(err);
+            res.send({status:false})
         }else{
-            res.send(response);
+            res.send({status:true});
         }
     })
 })

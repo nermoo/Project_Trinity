@@ -50,8 +50,8 @@ const Home=()=>{
                 </Grid>
             </Grid>
             <Grid item xs={4}>
-                <Card>Component is not developed yet</Card>
-                {/* <Route path=':id' element={<Blogcon/>}/> */} methna routes walin ghnda one gema
+                <Card>Component yet to be developed</Card>
+                {/* <Route path=':id' element={<Blogcon/>}/> */}
             </Grid>
         </Grid>
 

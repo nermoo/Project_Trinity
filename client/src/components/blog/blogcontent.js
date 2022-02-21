@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions,Grid } from '@mui/material';
+import { Button, CardActionArea, CardActions,Grid, IconButton,Chip } from '@mui/material';
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
+import  BookmarkAddOutlinedIcon  from '@mui/icons-material/BookmarkAddOutlined';
 
 export default function MultiActionAreaCard(props) {
 
@@ -23,11 +24,18 @@ export default function MultiActionAreaCard(props) {
             setRes(res.data.post);
             setTags(res.data.tags);
             axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
-                setAuth(Ares.data)
+                setAuth(Ares.data);
             })
         })
     
     }
+
+    const addBookmark=()=>{
+      const user=localStorage.getItem('id');
+      axios.post('http://localhost:5000/blog/saved',{userid:user,postid:id}).then(res=>{
+          console.log(res.data);
+      })
+  }        
 
   useEffect(()=>{
     fetchData();
@@ -39,12 +47,22 @@ export default function MultiActionAreaCard(props) {
           <Grid item xs={10}>
 
     <Card>
-      <CardActionArea>
         
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Grid container>
+            <Grid item xs={6}>
+            <Typography gutterBottom variant="h5" component="div">
             {postres.title}
           </Typography>
+            </Grid>
+            <Grid item xs={5}></Grid>
+            <Grid item xs={1}>
+            <IconButton onClick={addBookmark}>
+                 <BookmarkAddOutlinedIcon />
+            </IconButton>
+            </Grid>
+          </Grid>
+          
           <CardMedia
           component="img"
           height="240"
@@ -55,11 +73,24 @@ export default function MultiActionAreaCard(props) {
             {parse(`${postres.post}`)}
           </Typography>
         </CardContent>
-      </CardActionArea>
       <CardActions>
+        <Grid container>
+          <Grid item xs={6}>
+            <Grid contaner>
+            {tags.map((tag)=>(
+                <Grid item sx={{marginTop:'auto',marginBottom:'auto', paddingRight:'5px'}}>
+                    <Chip label={tag}></Chip>
+                </Grid>
+                ))}
+            </Grid>
+          </Grid>
+          <Grid item xs={5}></Grid>
+          <Grid item xs={1}>
         <Button size="small" color="primary">
           Share
         </Button>
+          </Grid>
+        </Grid>
       </CardActions>
     </Card>
           </Grid>
