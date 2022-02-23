@@ -61,7 +61,7 @@ export default function BlogCard(props) {
     const months=['January','February','March','April','May','June','July','August','September','Octomber','November','December'];
     const image='http://localhost:5000/posts/'+postres.image;
     const title=postres.title;
-    const userName=authres.name;
+    const authorName=authres.name;
     const day=postres.day;
     const month=months[postres.month];
     const date=day+" "+month;
@@ -87,10 +87,10 @@ export default function BlogCard(props) {
                       <Avatar src={profilepic}/>
                       </Grid>
                       <Grid item xs={6} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>
-                      <Typography >{userName}</Typography>
+                      <Typography >{authorName}</Typography>
                       </Grid>
                       <Grid item xs={4}>
-                      <Follow id={authid}/>
+                      <Follow id={authid} name={authorName}/>
                       </Grid>
                   </Grid>
                       <CardContent>

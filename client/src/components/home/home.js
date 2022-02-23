@@ -18,6 +18,11 @@ const Home=()=>{
         axios.get('http://localhost:5000/').then(res=>{
             setIds(res.data)
         })
+        // if(localStorage.getItem('role')==='reader'){
+        //     axios.post('http://localhost:5000/following',{id:localStorage.getItem('id')}).then(res=>{
+        //         console.log(res);
+        //     })
+        // }
     }
     console.log(ids);
 

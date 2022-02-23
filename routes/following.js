@@ -17,16 +17,6 @@ router.post('/', async (req,res,next)=>{
             res.send({status:true});
         }
     })
+}) 
 
-
-     
-
-    //userslawa ganda one unge id eka use krla
-
-  })
-
-
-
-
-
-module.exports=router;
+    module.exports= router;

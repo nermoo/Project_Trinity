@@ -64,11 +64,8 @@ router.post('/post',(req,res)=>{
             console.log(err);
 
         }else{
-            console.log(post);
             const content = convert(post.post,{wordwrap: 130});
-            console.log(content);
             const tags=post.tags.split(',');
-            console.log(tags);
             res.send({post,tags,content});//destructure the res and send
         }
     })
@@ -77,14 +74,12 @@ router.post('/post',(req,res)=>{
 
 router.post('/content',(req,res)=>{
     let postid=req.body.id;
-    console.log(postid);
     blog.findById(postid,function(err,post){
         if(err){
             console.log(err);
 
         }else{
             const tags=post.tags.split(',');
-            console.log(tags);
             res.send({post,tags});
         }
     })
@@ -92,7 +87,6 @@ router.post('/content',(req,res)=>{
 
 router.post('/author',(req,res)=>{
     let authid=req.body.id;
-    console.log(authid);
     user.findById(authid, function (err, auth) {
         if (err){
             console.log(err);
@@ -106,7 +100,6 @@ router.post('/author',(req,res)=>{
 
 router.post('/saved',(req,res)=>{
     const ids=req.body;
-    console.log(ids);
     const item=new savedItem({postId:ids.postid, userId:ids.userid});
     item.save((err,response)=>{
         if(err){

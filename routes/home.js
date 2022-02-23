@@ -13,7 +13,6 @@ router.get('/', async (req,res)=>{
             var ids=[];
             docs.map(id=>{
                 ids.push(id._id);
-                console.log(ids);
              })
             res.send(ids);
         }

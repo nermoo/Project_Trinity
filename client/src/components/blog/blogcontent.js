@@ -75,16 +75,17 @@ export default function MultiActionAreaCard(props) {
         </CardContent>
       <CardActions>
         <Grid container>
+          <Grid item xs={1}></Grid>
           <Grid item xs={6}>
-            <Grid contaner>
+            <Grid container>
             {tags.map((tag)=>(
                 <Grid item sx={{marginTop:'auto',marginBottom:'auto', paddingRight:'5px'}}>
                     <Chip label={tag}></Chip>
                 </Grid>
                 ))}
             </Grid>
-          </Grid>
-          <Grid item xs={5}></Grid>
+          </Grid> 
+          <Grid item xs={4}></Grid>
           <Grid item xs={1}>
         <Button size="small" color="primary">
           Share
