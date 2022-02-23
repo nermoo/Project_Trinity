@@ -15,6 +15,13 @@ export const setPost=(postString)=>{
     }
 }
 
+export const setFollowing=(list)=>{
+    return{
+        type:'updateFollowing',
+        payload:list
+    }
+}
+
 export const login=()=>{
     return{
         type:'login'

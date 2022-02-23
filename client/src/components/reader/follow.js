@@ -9,9 +9,11 @@ const Follow=(props)=>{
     const [followAlert,setFollowalt]=useState(false);
     const follower=localStorage.getItem('id');
     const following=props.id;
+    const list=props.list;
     const authName=props.name
     const vertical='top';
     const horizontal='center';
+    
     const follow=()=>{
         setFollwingStatus(!followingStatus);
         if(followingStatus===true){
@@ -38,8 +40,11 @@ const Follow=(props)=>{
     
 
     useEffect(()=>{
-        
-    },[followingStatus])
+        if(list.includes(following)){
+            setStatus('Following');
+            setFollwingStatus(true);
+        }
+    },[])
 
     return(
         <>

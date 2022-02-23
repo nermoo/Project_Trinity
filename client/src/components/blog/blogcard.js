@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import Follow from './../reader/follow';
+import { useSelector } from 'react-redux';
 
 
 const Title=styled(Typography,{
@@ -88,9 +89,6 @@ export default function BlogCard(props) {
                       </Grid>
                       <Grid item xs={6} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>
                       <Typography >{authorName}</Typography>
-                      </Grid>
-                      <Grid item xs={4}>
-                      <Follow id={authid} name={authorName}/>
                       </Grid>
                   </Grid>
                       <CardContent>

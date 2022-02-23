@@ -1,20 +1,21 @@
 const express=require('express');
 const router=express.Router();
-const followers=require('../models/follower');
+const following=require('../models/follower');
 
 router.post('/', async (req,res,next)=>{
 
-    const follower= req.body.follower;
-    const following= req.body.following;
-
-    const follow=new followers({reader:follower,blogger:following});
-    follow.save((err,stat)=>{
+    const id=req.body.id;
+    console.log(id);
+    following.find({reader:id},function(err,docs){
         if(err){
             console.log(err);
-            res.send({status:false});
         }else{
-            console.log(stat);
-            res.send({status:true});
+            let list=[];
+            docs.map(doc=>{
+                list.push(doc.blogger);
+                })
+            let dislist=[...new Set(list)];
+            res.send(dislist)
         }
     })
 }) 
