@@ -4,29 +4,38 @@ import { Button, Snackbar, Alert } from '@mui/material';
 
 const Follow=(props)=>{
     
-    const [status,setStatus]=useState('Follow');
-    const [followingStatus,setFollwingStatus]=useState(false);
+    const [statustxt,setStatustxt]=useState('Follow');
+    const [followingStatus,setFollwingStatus]=useState(props.status);
+    console.log(followingStatus);
     const [followAlert,setFollowalt]=useState(false);
     const follower=localStorage.getItem('id');
     const following=props.id;
-    const list=props.list;
     const authName=props.name
     const vertical='top';
     const horizontal='center';
+
+    const Statusvalidate=()=>{
+        if(followingStatus===true){
+            setStatustxt('Following');
+        }else{
+            setStatustxt('Follow');
+        }
+    }
     
     const follow=()=>{
         setFollwingStatus(!followingStatus);
         if(followingStatus===true){
-            setStatus('Following');
+            setStatustxt('Following');
             axios.post('http://localhost:5000/follow',{follower:follower,following:following}).then(res=>{
                 console.log(res.data.status);
                 if(res.data.status===true){
                     setFollowalt(true)
                 }
             })
-        }else{
-            setStatus('Follow');
-        } 
+        }
+        if(followingStatus===false){
+            setStatustxt('Follow');
+        }
         
     }
 
@@ -40,16 +49,13 @@ const Follow=(props)=>{
     
 
     useEffect(()=>{
-        if(list.includes(following)){
-            setStatus('Following');
-            setFollwingStatus(true);
-        }
+        Statusvalidate()
     },[])
 
     return(
         <>
         <Button onClick={follow}>
-            {status}
+            {statustxt}
         </Button>
         <Snackbar anchorOrigin={{ vertical, horizontal}} open={followAlert} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success"> Now you are following {authName}</Alert>

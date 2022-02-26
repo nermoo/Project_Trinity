@@ -17,12 +17,31 @@ router.post('/', async (req,res,next)=>{
             res.send({status:true});
         }
     })
-
-
-     
-
     //userslawa ganda one unge id eka use krla
 
+  })
+
+  router.post('/status', async (req,res,next)=>{
+      console.log(req.body);
+      followers.find({reader:req.body.reader,blogger:req.body.author},function(err,docs){
+        console.log(docs);
+        if(err){
+            console.log(err);
+        }else{
+            if(docs.length>0){
+                res.send({status:true});
+            }
+            else{
+                res.send({status:false});
+            }
+        }
+      })
+  })
+
+  router.post('/unfollow', async (req,res,next)=>{
+      followers.deleteOne({reader:req.body.follower,blogger:req.body.following},function(err,res){
+          console.log(res);
+      })
   })
 
 

@@ -3,13 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions,Grid, IconButton,Chip, Avatar } from '@mui/material';
+import { Button, CardActionArea, CardActions, Grid, IconButton, Chip, Avatar, Snackbar, Alert } from '@mui/material';
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import  BookmarkAddOutlinedIcon  from '@mui/icons-material/BookmarkAddOutlined';
-import Follow from './../reader/follow';
 import { useSelector } from 'react-redux';
 
 export default function MultiActionAreaCard(props) {
@@ -18,20 +17,35 @@ export default function MultiActionAreaCard(props) {
   const id=params.id;
   const [postres,setRes]=useState('');
   const [authres,setAuth]=useState('');
-  const following=useSelector(state=>state.following);
+  const [followAlert,setFollowalt]=useState(false);
+  const [unfollowAlert,setunFollowalt]=useState(false);
+  const [flwbtn,setFlwbtn]=useState('Follow');
+  const [followstatus,setFollowingstatus]=useState(false);
   const [tags,setTags]=useState([]);
   const cover='http://localhost:5000/posts/'+postres.image;
   const profilepic='http://localhost:5000/'+authres.image;
+  const vertical='top';
+  const horizontal='center';
   const fetchData=async ()=>{
-        axios.post('http://localhost:5000/blog/content',{id:id}).then(res=>{
+    
+        await axios.post('http://localhost:5000/blog/content',{id:id}).then(res=>{
             
             setRes(res.data.post);
             setTags(res.data.tags);
             axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
                 setAuth(Ares.data);
-                console.log(authres);
+                axios.post('http://localhost:5000/follow/status',{reader:localStorage.getItem('id'), author:res.data.post.authorid}).then(fres=>{
+                  console.log(fres.data.status);
+                  if(fres.data.status===true){
+                    console.log('im here');
+                    setFollowingstatus(true);
+                    setFlwbtn('Following');
+        
+                  }
+                })
             })
         })
+
     
     }
 
@@ -40,11 +54,55 @@ export default function MultiActionAreaCard(props) {
       axios.post('http://localhost:5000/blog/saved',{userid:user,postid:id}).then(res=>{
           console.log(res.data);
       })
-  }        
+  }     
+  
+  
+    const follow= async ()=>{
+      
+      console.log(followstatus);
+      if(followstatus===true){
+          setFlwbtn('Following');
+          axios.post('http://localhost:5000/follow',{follower:localStorage.getItem('id'),following:postres.authorid}).then(res=>{
+              console.log(res.data.status);
+              if(res.data.status===true){
+                  setFollowalt(true)
+              }
+          })
+      }
+      if(followstatus===false){
+          setunFollowalt(true);
+          axios.post('http://localhost:5000/follow/unfollow',{follower:localStorage.getItem('id'),following:postres.authorid}).then(res=>{
+              console.log(res.data.status);
+              
+          })
+          setFlwbtn('Follow');
+      }
+      
+  }
+
+  const handleClick= async ()=>{
+    if(followstatus===true){
+      setFollowingstatus(false);
+      follow();
+    }else{
+      setFollowingstatus(true);
+      follow();
+    }
+    
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setFollowalt(false);
+    setunFollowalt(false);
+  };
 
   useEffect(()=>{
     fetchData();
-  },[])
+  },[followstatus])
 
   return (
       <Grid container>
@@ -67,7 +125,8 @@ export default function MultiActionAreaCard(props) {
             
             </Grid>
             <Grid item xs={5}>
-              <Follow id={postres.authorid} name={authres.name} list={following}/>
+              <Button onClick={handleClick}>{flwbtn}</Button>
+              {/* <Follow id={postres.authorid} name={authres.name} list={following} status={followstatus}/> */}
             </Grid>
             <Grid item xs={1}>
             <IconButton onClick={addBookmark}>
@@ -82,7 +141,7 @@ export default function MultiActionAreaCard(props) {
           image={cover}
           alt={postres.title}
         />
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography sx={{marginTop:'10px'}} gutterBottom variant="h5" component="div">
             {postres.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -111,7 +170,14 @@ export default function MultiActionAreaCard(props) {
       </CardActions>
     </Card>
           </Grid>
-          <Grid item xs={1}></Grid>
+          <Grid item xs={1}>
+          <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={followAlert} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success"> Now you are following {authres.name}</Alert>
+        </Snackbar>
+        <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={unfollowAlert} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success"> Successfully unfollowed {authres.name}</Alert>
+        </Snackbar>
+          </Grid>
       </Grid>
   );
 }
