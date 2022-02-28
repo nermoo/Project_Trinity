@@ -65,7 +65,7 @@ app.use('/user',user);
 app.use('/blog',blog);
 app.use('/profile',profile);
 app.use('/following',following);
-app.use('/comment',comment);
+app.use('/comments',comment);
 
 
 app.use(express.static('public'));

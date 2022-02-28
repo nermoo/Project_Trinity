@@ -10,6 +10,8 @@ import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import  BookmarkAddOutlinedIcon  from '@mui/icons-material/BookmarkAddOutlined';
 import { useSelector } from 'react-redux';
+import Comments from './comments';
+import Commentedit from './commentedit';
 
 export default function MultiActionAreaCard(props) {
 
@@ -105,6 +107,7 @@ export default function MultiActionAreaCard(props) {
   },[followstatus])
 
   return (
+    <>
       <Grid container>
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
@@ -179,5 +182,15 @@ export default function MultiActionAreaCard(props) {
         </Snackbar>
           </Grid>
       </Grid>
+      <Grid container>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={11}>
+          <Typography>
+            Comments
+          </Typography>
+        </Grid>
+      </Grid>
+      <Comments id={id}/>
+    </>
   );
 }
