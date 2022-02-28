@@ -54,6 +54,7 @@ var user=require('./routes/followers');
 var blog=require('./routes/post');
 var profile=require('./routes/profile');
 var following=require('./routes/following');
+var comment=require('./routes/comment');
 
 
 app.use('/login',login);
@@ -64,6 +65,7 @@ app.use('/user',user);
 app.use('/blog',blog);
 app.use('/profile',profile);
 app.use('/following',following);
+app.use('/comment',comment);
 
 
 app.use(express.static('public'));
