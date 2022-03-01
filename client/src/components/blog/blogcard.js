@@ -38,6 +38,7 @@ export default function BlogCard(props) {
     const [authres,setAuth]=useState('');
     const [tags,setTags]=useState([]);
     const [content,setContent]=useState('');
+    const [name,setName]=useState('');
     const [authid,setAuthid]=useState('');
     const id=props.id;
     const fetchData=async ()=>{
@@ -48,6 +49,7 @@ export default function BlogCard(props) {
             setContent(res.data.content);
             setAuthid(res.data.post.authorid);
             axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
+                setName(Ares.data.name);
                 setAuth(Ares.data)
             })
         })
@@ -65,6 +67,7 @@ export default function BlogCard(props) {
     const authorName=authres.name;
     const day=postres.day;
     const month=months[postres.month];
+    // const author=authorName.charAt(0).toUpperCase() +authorName.slice(1);
     const date=day+" "+month;
     const profilepic='http://localhost:5000/'+authres.image;
 
@@ -87,8 +90,8 @@ export default function BlogCard(props) {
                       <Grid item xs={1}>
                       <Avatar src={profilepic}/>
                       </Grid>
-                      <Grid item xs={6} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>
-                      <Typography >{authorName}</Typography>
+                      <Grid item xs={6} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px',marginLeft:'5px'}}>
+                      <Typography >{name.charAt(0).toUpperCase() +name.slice(1)}</Typography>
                       </Grid>
                   </Grid>
                       <CardContent>

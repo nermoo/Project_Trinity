@@ -19,6 +19,7 @@ export default function MultiActionAreaCard(props) {
   const id=params.id;
   const [postres,setRes]=useState('');
   const [authres,setAuth]=useState('');
+  const [name,setName]=useState('');
   const [followAlert,setFollowalt]=useState(false);
   const [unfollowAlert,setunFollowalt]=useState(false);
   const [flwbtn,setFlwbtn]=useState('Follow');
@@ -36,6 +37,7 @@ export default function MultiActionAreaCard(props) {
             setTags(res.data.tags);
             axios.post('http://localhost:5000/blog/author',{id:res.data.post.authorid}).then(Ares=>{
                 setAuth(Ares.data);
+                setName(Ares.data.name)
                 axios.post('http://localhost:5000/follow/status',{reader:localStorage.getItem('id'), author:res.data.post.authorid}).then(fres=>{
                   console.log(fres.data.status);
                   if(fres.data.status===true){
@@ -124,7 +126,7 @@ export default function MultiActionAreaCard(props) {
                 <Avatar src={profilepic}/>
               </Grid>
               <Grid item xs={11} sx={{marginTop:'auto',marginBottom:'auto',paddingLeft:'10px'}}>
-                      <Typography >{authres.name}</Typography>
+                      <Typography >{name.charAt(0).toUpperCase() +name.slice(1)}</Typography>
               </Grid>
               </Grid>
             

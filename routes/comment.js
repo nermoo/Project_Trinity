@@ -3,7 +3,20 @@ const router=express.Router();
 const comment = require('./../models/comment');
 
 router.post('/get',(req,res,next)=>{
-    console.log(req.body);
+    console.log(req.body.id);
+    let id=req.body.id;
+    comment.find({blogid:id},function(err,docs){
+        if(err){
+            console.log(err);
+        }else{
+            var list=[];
+            docs.map(data=>{
+                list.push(data);
+             })
+             console.log(list);
+            res.send(list);
+        }
+    })
     
 })
 

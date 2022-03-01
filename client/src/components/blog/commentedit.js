@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import { Grid, TextareaAutosize, Button, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { updater } from './../../actions';
 
 
 
@@ -11,12 +13,14 @@ const Commentedit=(props)=>{
     const authName=localStorage.getItem('user');
     const [commentalt,setCommentalt]=useState(false);
     const [clear,setClear]=useState(false);
+    const dispatch=useDispatch();
     const blogid=props.id;
     const cmntSave=(e)=>{
         axios.post('http://localhost:5000/comments/save',{blogid:blogid,comment:comment,authName:authName}).then(res=>{
             if (res.data.status===true){
                 setComment('');
                 setCommentalt(true);
+                dispatch(updater());
             }else{
                 console.log("not saved");
             }

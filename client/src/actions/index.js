@@ -27,3 +27,9 @@ export const login=()=>{
         type:'login'
     }
 }
+
+export const updater=()=>{
+    return{
+        type:'stupdate'
+    }
+}

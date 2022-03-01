@@ -3,21 +3,27 @@ import { Grid,Card,Stack, CardContent, Typography } from '@mui/material';
 import Comment from './comment';
 import axios from 'axios';
 import Commentedit from './commentedit';
+import { useSelector } from 'react-redux';
 
 
 const Comments=(props)=>{
 
     const blogid=props.id;
-    console.log(blogid);
     const [comments,setComments]=useState([]);
+    const updater=useSelector(state=>state.Stateupdate);
+    console.log(comments);
     const fetchData=()=>{
-        axios.post('http://localhost:5000/comments/get',{id:blogid})
+        axios.post('http://localhost:5000/comments/get',{id:blogid}).then(res=>{
+            console.log(res.data.list);
+            setComments(res.data);
+
+        })
     }
 
 
     useEffect(()=>{
         fetchData();
-    },[])
+    },[updater])
     
     return(
         <>
@@ -33,65 +39,15 @@ const Comments=(props)=>{
                 spacing={1}
                 >
                     
-                        <Card variant='outlined'>
-                            <CardContent>
-                                <Grid container>
-                                    <Grid item xs={10}>
-                                        <Typography sx={{color:'gray',marginBottom:'5px'}}>
-                                            Aravinda nawarathna
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={1}></Grid>
-                                </Grid>
-                                <Typography sx={{marginRight:'5px'}}>
-                                content is good  and there are something. is good  and there is notheing to say anymore
-                                </Typography>
-                                <Typography sx={{fontSize:'10px',marginTop:'5px',color:'gray'}}>
-                                 january 12
-                                </Typography>
-                            </CardContent>
                         
-                        </Card>
                     
-                        <Card variant='outlined'>
-                            <CardContent>
-                                <Grid container>
-                                    <Grid item xs={10}>
-                                        <Typography sx={{color:'gray',marginBottom:'5px'}}>
-                                            Aravinda nawarathna
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={1}></Grid>
-                                </Grid>
-                                <Typography sx={{marginRight:'5px'}}>
-                                content is good  and there are something. is good  and there is notheing to say anymore
-                                </Typography>
-                                <Typography sx={{fontSize:'10px',marginTop:'5px',color:'gray'}}>
-                                 january 12
-                                </Typography>
-                            </CardContent>
-                        
-                        </Card>
-                    
-                        <Card >
-                            <CardContent>
-                                <Grid container>
-                                    <Grid item xs={10}>
-                                        <Typography sx={{color:'gray',marginBottom:'5px'}}>
-                                            Aravinda nawarathna
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={1}></Grid>
-                                </Grid>
-                                <Typography sx={{marginRight:'5px'}}>
-                                content is good  and there are something. is good  and there is notheing to say anymore
-                                </Typography>
-                                <Typography sx={{fontSize:'10px',marginTop:'5px',color:'gray'}}>
-                                 january 12
-                                </Typography>
-                            </CardContent>
-                        
-                        </Card>
+                    {
+                       comments.map(comment=>{
+                           return(
+                               <Comment comment={comment}/>
+                           )
+                       })
+                   } 
                     
                 </Stack>
             </Grid>

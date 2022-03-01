@@ -5,7 +5,6 @@ const following=require('../models/follower');
 router.post('/', async (req,res,next)=>{
 
     const id=req.body.id;
-    console.log(id);
     following.find({reader:id},function(err,docs){
         if(err){
             console.log(err);
