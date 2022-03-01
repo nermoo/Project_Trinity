@@ -59,7 +59,7 @@ export default function MultiActionAreaCard(props) {
   }     
   
   
-    const follow= async ()=>{
+    const follow= ()=>{
       
       console.log(followstatus);
       if(followstatus===true){
@@ -73,11 +73,12 @@ export default function MultiActionAreaCard(props) {
       }
       if(followstatus===false){
           setunFollowalt(true);
+          setFlwbtn('Follow');
           axios.post('http://localhost:5000/follow/unfollow',{follower:localStorage.getItem('id'),following:postres.authorid}).then(res=>{
               console.log(res.data.status);
               
           })
-          setFlwbtn('Follow');
+          
       }
       
   }
@@ -85,6 +86,7 @@ export default function MultiActionAreaCard(props) {
   const handleClick= async ()=>{
     if(followstatus===true){
       setFollowingstatus(false);
+      setFlwbtn('Follow');
       follow();
     }else{
       setFollowingstatus(true);
@@ -104,7 +106,7 @@ export default function MultiActionAreaCard(props) {
 
   useEffect(()=>{
     fetchData();
-  },[followstatus])
+  },[id])
 
   return (
     <>
@@ -184,8 +186,8 @@ export default function MultiActionAreaCard(props) {
       </Grid>
       <Grid container>
         <Grid item xs={1}></Grid>
-        <Grid item xs={11}>
-          <Typography>
+        <Grid item xs={11} sx={{marginTop:'10px'}}>
+          <Typography sx={{fontSize:'15px'}}>
             Comments
           </Typography>
         </Grid>
