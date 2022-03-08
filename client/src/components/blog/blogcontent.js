@@ -22,6 +22,7 @@ export default function MultiActionAreaCard(props) {
   const [name,setName]=useState('');
   const [followAlert,setFollowalt]=useState(false);
   const [unfollowAlert,setunFollowalt]=useState(false);
+  const [clicked,setClick]=useState(false);
   const [flwbtn,setFlwbtn]=useState('Follow');
   const [followstatus,setFollowingstatus]=useState(false);
   const [tags,setTags]=useState([]);
@@ -82,18 +83,14 @@ export default function MultiActionAreaCard(props) {
           })
           
       }
+
+      setClick(false);
       
   }
 
-  const handleClick= async ()=>{
-    if(followstatus===true){
-      setFollowingstatus(false);
-      setFlwbtn('Follow');
-      follow();
-    }else{
-      setFollowingstatus(true);
-      follow();
-    }
+  const handleClick= ()=>{
+    setFollowingstatus(status=>!status);
+    setClick(true);
     
   }
 
@@ -109,6 +106,16 @@ export default function MultiActionAreaCard(props) {
   useEffect(()=>{
     fetchData();
   },[id])
+
+  useEffect(()=>{
+    //methna follow status eka true da kyla btn eke name eka change krnda
+    if(clicked===true){
+      follow();
+
+      console.log('clicked');
+    }
+
+  },[clicked])
 
   return (
     <>
