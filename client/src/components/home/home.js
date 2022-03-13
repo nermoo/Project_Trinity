@@ -7,6 +7,7 @@ import Blogcon from './../blog/blogcontent';
 import { Route,Routes } from 'react-router-dom';
 import { setFollowing } from '../../actions';
 import { useDispatch } from 'react-redux';
+import Quick from './quickaccess';
 
 
 
@@ -59,7 +60,7 @@ const Home=()=>{
                 </Grid>
             </Grid>
             <Grid item xs={4}>
-                <Card>Component yet to be developed</Card>
+                <Quick/>
                 {/* <Route path=':id' element={<Blogcon/>}/> */}
             </Grid>
         </Grid>

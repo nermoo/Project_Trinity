@@ -79,7 +79,7 @@ export default function BlogCard(props) {
     }
     
   return (
-      <Grid container spacing={2}  sx={{marginTop:'10px'}}>
+      <Grid container spacing={2}  sx={{marginBottom:'10px'}}>
           {/* <Grid item xs={1}></Grid> */}
           <Grid item xs={12}>
               <Card variant="outlined">

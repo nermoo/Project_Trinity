@@ -9,9 +9,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import  BookmarkAddOutlinedIcon  from '@mui/icons-material/BookmarkAddOutlined';
-import { useSelector } from 'react-redux';
 import Comments from './comments';
-import Commentedit from './commentedit';
 
 export default function MultiActionAreaCard(props) {
 

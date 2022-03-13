@@ -12,7 +12,7 @@ const Comment=(props)=>{
     const content=props.comment.comment;
 
     return(
-       <><Card sx={{width:'-moz-available'}} variant='outlined'>
+       <><Card sx={{width:'-moz-available',border:'none',boxShadow:'none'}} variant='outlined'>
            <Grid container>
                <Grid item xs={12}>
                 <CardContent>

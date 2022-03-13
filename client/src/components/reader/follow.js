@@ -4,29 +4,41 @@ import { Button, Snackbar, Alert } from '@mui/material';
 
 const Follow=(props)=>{
     
-    const [statustxt,setStatustxt]=useState('Follow');
-    const [followingStatus,setFollwingStatus]=useState(props.status);
+    const [followingStatus,setFollwingStatus]=useState(false);
     console.log(followingStatus);
+    const [unfollowAlert,setunFollowalt]=useState(false);
+    const [clicked,setClick]=useState(false);
+    const [flwbtn,setFlwbtn]=useState('Follow');
     const [followAlert,setFollowalt]=useState(false);
     const follower=localStorage.getItem('id');
     const following=props.id;
     const authName=props.name
+    console.log(props);
     const vertical='top';
     const horizontal='center';
 
     const Statusvalidate=()=>{
-        if(followingStatus===true){
-            setStatustxt('Following');
-        }else{
-            setStatustxt('Follow');
-        }
+        axios.post('http://localhost:5000/follow/status',{reader:localStorage.getItem('id'), author:following}).then(fres=>{
+                  console.log(fres.data.status);
+                  if(fres.data.status===true){
+                    setFollwingStatus(true);
+                    if(fres.data.status===true){
+                        setFlwbtn('Following');
+                    }else{
+                        setFlwbtn('Follow');
+                    }
+        
+                  }
+                })
+        
     }
     
-    const follow=()=>{
-        setFollwingStatus(!followingStatus);
+    const follow= ()=>{
+      
+        console.log(followingStatus);
         if(followingStatus===true){
-            setStatustxt('Following');
-            axios.post('http://localhost:5000/follow',{follower:follower,following:following}).then(res=>{
+            setFlwbtn('Following');
+            axios.post('http://localhost:5000/follow',{follower:localStorage.getItem('id'),following:following}).then(res=>{
                 console.log(res.data.status);
                 if(res.data.status===true){
                     setFollowalt(true)
@@ -34,31 +46,59 @@ const Follow=(props)=>{
             })
         }
         if(followingStatus===false){
-            setStatustxt('Follow');
+            setunFollowalt(true);
+            setFlwbtn('Follow');
+            axios.post('http://localhost:5000/follow/unfollow',{follower:localStorage.getItem('id'),following:following}).then(res=>{
+                console.log(res.data.status);
+                
+            })
+            
         }
+  
+        setClick(false);
         
     }
-
+  
+    const handleClick= ()=>{
+        setFollwingStatus(status=>!status);
+      setClick(true);
+      
+    }
+  
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setFollowalt(false);
-      };
-    
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setFollowalt(false);
+      setunFollowalt(false);
+    };
+  
+  
+    useEffect(()=>{
+      //methna follow status eka true da kyla btn eke name eka change krnda
+      if(clicked===true){
+        follow();
+        console.log('clicked');
+      }
+  
+    },[clicked])
 
     useEffect(()=>{
         Statusvalidate()
-    },[])
+        
+    },[followingStatus])
 
     return(
         <>
-        <Button onClick={follow}>
-            {statustxt}
+        <Button onClick={handleClick}>
+            {flwbtn}
         </Button>
-        <Snackbar anchorOrigin={{ vertical, horizontal}} open={followAlert} onClose={handleClose}>
+        <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={followAlert} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success"> Now you are following {authName}</Alert>
+        </Snackbar>
+        <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={unfollowAlert} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success"> Successfully unfollowed {authName}</Alert>
         </Snackbar>
         </>
     );
