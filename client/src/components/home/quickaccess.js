@@ -1,9 +1,16 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Grid, Card } from '@mui/material';
+import axios from 'axios';
+
 
 
 const Quick=()=>{
     
+    useEffect(()=>{
+        axios.get('http://localhost:5000/quick').then(qres=>{
+            console.log(qres);
+        })
+    },[])
     return(
         <>
         

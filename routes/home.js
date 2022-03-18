@@ -39,5 +39,38 @@ router.post('/',(req,res)=>{
 //     res.send("hello from about");
 // })
 
+router.get('/quick',(req,res,next)=>{
+    // posts.aggregate([{$group:{
+    //     _id:'$authorid',
+    //     count:{$sum:1}
+    // }}],function(err,docs){
+    //     console.log('here are the' );
+    //     console.log(docs);
+    //     res.send(docs);
+    // }) 
+
+    posts.aggregate([
+        { "$addFields": { 
+        "tag": { "$split": [ "$tags", "," ] } 
+        }},
+        { $unwind : "$tag" },
+        {$group:{
+                _id:'$tag',
+                count:{$sum:1}
+         }},
+         {
+             $sort:{count:-1}
+         }
+],function(err,docs){
+        console.log('here are the' );
+        console.log(docs);
+        res.send(docs);
+    });
+    
+    
+    
+    // methnta unwind use krla blnda one loop krnda puluwanda kyla
+})
+
 
 module.exports = router;
