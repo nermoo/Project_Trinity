@@ -1,6 +1,7 @@
 const express= require('express');
 const router=express.Router();
 const posts=require('./../models/post');
+const users=require('./../models/user');
 
 router.get('/', async (req,res)=>{
 
@@ -37,29 +38,9 @@ router.post('/',(req,res)=>{
 //     res.send("hello from about");
 // })
 
-router.get('/quick',async (req,res,next)=>{
-    const authors=[];
-    const tags=[];
+router.get('/quick/tags',async (req,res,next)=>{
     
-   await posts.aggregate([
-       {
-           $group:{
-            _id:'$authorid',
-            count:{$sum:1}
-        }},
-        { 
-            $limit : 5 
-        },
-        {
-            $sort:{count:-1}
-        }
-    ],function(err,docs){
-        console.log(docs);
-        docs.map(doc=>{
-            authors.push(doc)
-        })
-
-    }) 
+    const tags=[];
 
     await posts.aggregate([
         { 
@@ -89,7 +70,7 @@ router.get('/quick',async (req,res,next)=>{
             docs.map(doc=>{
                 tags.push(doc)
             })
-            res.send({tags:tags,authors:authors});
+            res.send({tags:tags});
         }
             
             
@@ -98,6 +79,49 @@ router.get('/quick',async (req,res,next)=>{
     
 
     
+})
+
+
+router.get('/quick/auth', (req,res,next)=>{
+
+    const authors=[];
+
+
+
+     posts.aggregate([
+        {
+            $group:{
+             _id:'$authorid',
+             count:{$sum:1}
+         }},
+         { 
+             $limit : 5 
+         },
+         {
+             $sort:{count:-1}
+         }
+     ], function(err,docs){
+ 
+          docs.map(doc=>{
+             users.findById(doc._id,{_id:1,name:1,profilePic:1},function(err,docs){
+                 if(err){
+                     console.log(err);
+                 }else{  
+                     console.log(docs);
+                     authors.push(docs);
+                 }
+             })
+             
+         })
+           setTimeout(()=>{
+
+               res.send({authors:authors})
+           },3000)
+        
+ 
+     })
+
+     
 })
 
 
