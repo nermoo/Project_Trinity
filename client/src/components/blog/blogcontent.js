@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import  BookmarkAddOutlinedIcon  from '@mui/icons-material/BookmarkAddOutlined';
 import Comments from './comments';
+import Audio from './audio';
 
 export default function MultiActionAreaCard(props) {
 
@@ -121,7 +122,7 @@ export default function MultiActionAreaCard(props) {
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
 
-    <Card>
+    <Card sx={{}}>
         
         <CardContent>
           <Grid container sx={{marginBottom:'10px'}}>
@@ -146,7 +147,7 @@ export default function MultiActionAreaCard(props) {
             </IconButton>
             </Grid>
           </Grid>
-          
+          <Audio/>
           <CardMedia
           component="img"
           height="240"
@@ -174,9 +175,7 @@ export default function MultiActionAreaCard(props) {
           </Grid> 
           <Grid item xs={4}></Grid>
           <Grid item xs={1}>
-        <Button size="small" color="primary">
-          Share
-        </Button>
+        
           </Grid>
         </Grid>
       </CardActions>

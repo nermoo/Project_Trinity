@@ -6,6 +6,7 @@ const router=express.Router();
 const multer=require('multer');
 const path=require('path');
 const { convert } = require('html-to-text');
+var gtts = require('node-gtts')('en');
 
 
 const DIR = 'public/posts';
@@ -111,6 +112,16 @@ router.post('/saved',(req,res)=>{
     })
 })
 
+router.post('/audio',(req,res)=>{
+    const text='Coding is very vast and there are many different ways to implement the same business logic in the code. In addition to this different languages provide different syntaxes/operators to perform a task.Today, we will see 6 ways in JavaScript that can save your lines of code and also enhance the understandability of the code. And will also see the difference of how code looks after their implementation.'
+    const __dirname='./public/audio'
+    var name="aravinda"
+    var filename=name+'.wav';
+    var filepath = path.join(__dirname, filename);
+    gtts.save(filepath, text, function() {
+    console.log('save done');
+    })
+})
 
 
 
