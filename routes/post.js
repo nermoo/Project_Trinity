@@ -113,14 +113,25 @@ router.post('/saved',(req,res)=>{
 })
 
 router.post('/audio',(req,res)=>{
-    const text='Coding is very vast and there are many different ways to implement the same business logic in the code. In addition to this different languages provide different syntaxes/operators to perform a task.Today, we will see 6 ways in JavaScript that can save your lines of code and also enhance the understandability of the code. And will also see the difference of how code looks after their implementation.'
-    const __dirname='./public/audio'
-    var name="aravinda"
-    var filename=name+'.wav';
-    var filepath = path.join(__dirname, filename);
-    gtts.save(filepath, text, function() {
-    console.log('save done');
+    console.log(req.body);
+    const id=req.body.id;
+    blog.findById(id,{authorid:0,title:0,day:0,month:0,tags:0,image:0},function(err,content){
+        if(err){
+            console.log(err);
+        }else{
+            const txt = convert(content.post,{wordwrap: 130});
+            console.log(txt);
+            const __dirname='./public/audio'
+            var name=id;
+            var filename=name+'.wav';
+            var filepath = path.join(__dirname, filename);
+            gtts.save(filepath, txt, function() {
+            console.log('save done');
+            res.send("done")
+            })
+        }
     })
+    
 })
 
 

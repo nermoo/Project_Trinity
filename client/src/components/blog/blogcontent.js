@@ -147,7 +147,7 @@ export default function MultiActionAreaCard(props) {
             </IconButton>
             </Grid>
           </Grid>
-          <Audio/>
+          <Audio id={id}/>
           <CardMedia
           component="img"
           height="240"
