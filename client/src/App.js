@@ -10,7 +10,8 @@ import Bprofile from './components/blogger/bloggerprofile';
 import Articles from './components/blog/articles';
 import Followers from './components/blogger/followers';
 import Blogcon from './components/blog/blogcontent';
-import Rprofile from './components/reader/readerProfile';
+import Readerprofile from './components/reader/readerProfile';
+import SavedItems from './components/reader/savedItems';
 
 
 
@@ -21,7 +22,10 @@ function App() {
         <Nav/>
       <Routes>
       <Route exact path='/' element={<Home/>}/>          
-      <Route path='/auth' element={<Auth/>}/>
+      <Route path='/auth' element={<Auth/>}>
+
+      </Route>
+
       <Route path='/editor' element={<Editor/>}/>
       <Route path='followers' element={<Followers/>}/>
       <Route path='posts'>
@@ -35,7 +39,9 @@ function App() {
           </Route>
         </Route>
         <Route path='user'>
-          <Route path=':name' element={<Rprofile/>}></Route>
+          <Route path=':name' element={<Readerprofile/>}>
+            <Route path='saved' element={<SavedItems/>}/>
+          </Route>
         </Route>
       </Route>
 

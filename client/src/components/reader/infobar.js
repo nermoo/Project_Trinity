@@ -8,15 +8,18 @@ import axios from 'axios';
 const Infobar=(props)=>{
 
   const [user,setUser]=useState({});
+  const [items,setItems]=useState('');
     const name=user.name;
     const profilePhoto='http://localhost:5000/'+user.profilePic;
     const numberOfFollowers=12;
-    const numberofArticles=props.articles;
+    const numberofArticles=items;
     const id=props.id;
 
     const fetchData=()=>{
-      axios.post('/profile/user',{id:id}).then(res=>{
-          setUser(res.data);
+      axios.post('/profile/reader',{id:id}).then(res=>{
+          console.log(res.data);
+          setUser(res.data.userInfo);
+          setItems(res.data.savedCount);
       })
   }
 
@@ -40,7 +43,7 @@ const Infobar=(props)=>{
                     </Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
-                        <Link to='/profile/followers' style={{textDecoration:'none'}}>
+                        <Link to={`/profile/user/${localStorage.getItem('user')}/following`} style={{textDecoration:'none'}}>
                         <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Following &nbsp;&nbsp;
                         {numberOfFollowers}
@@ -48,7 +51,7 @@ const Infobar=(props)=>{
                         </Link>
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
-                        <Link to='/profile/articles' style={{textDecoration:'none'}}>
+                        <Link to={`/profile/user/${localStorage.getItem('user')}/saved`} style={{textDecoration:'none'}}>
                         <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
                             Saved Items&nbsp;&nbsp;
                         {numberofArticles}

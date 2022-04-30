@@ -3,7 +3,6 @@ import { Grid, Box, Card, Typography, CardContent } from '@mui/material';
 
 
 const Comment=(props)=>{
-    console.log(props.comment);
     const name=props.comment.authName;
     const author=name.charAt(0).toUpperCase() +name.slice(1);
     const months=['January','February','March','April','May','June','July','August','September','Octomber','November','December'];

@@ -21,6 +21,7 @@ export default function MultiActionAreaCard(props) {
   const [name,setName]=useState('');
   const [followAlert,setFollowalt]=useState(false);
   const [unfollowAlert,setunFollowalt]=useState(false);
+  const [savedAlert,setSaved]=useState(false);
   const [clicked,setClick]=useState(false);
   const [flwbtn,setFlwbtn]=useState('Follow');
   const [followstatus,setFollowingstatus]=useState(false);
@@ -57,6 +58,7 @@ export default function MultiActionAreaCard(props) {
       const user=localStorage.getItem('id');
       axios.post('http://localhost:5000/blog/saved',{userid:user,postid:id}).then(res=>{
           console.log(res.data);
+          setSaved(true);
       })
   }     
   
@@ -100,6 +102,7 @@ export default function MultiActionAreaCard(props) {
 
     setFollowalt(false);
     setunFollowalt(false);
+    setSaved(false);
   };
 
   useEffect(()=>{
@@ -187,6 +190,9 @@ export default function MultiActionAreaCard(props) {
         </Snackbar>
         <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={unfollowAlert} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success"> Successfully unfollowed {authres.name}</Alert>
+        </Snackbar>
+        <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={savedAlert} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success"> Saved to read later</Alert>
         </Snackbar>
           </Grid>
       </Grid>
