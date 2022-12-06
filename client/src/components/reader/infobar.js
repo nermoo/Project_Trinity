@@ -11,7 +11,7 @@ const Infobar=(props)=>{
   const [items,setItems]=useState('');
     const name=user.name;
     const profilePhoto='http://localhost:5000/'+user.profilePic;
-    const numberOfFollowers=12;
+    const numberOfFollowers=0;
     const numberofArticles=items;
     const id=props.id;
 

@@ -78,9 +78,9 @@ const Signup=()=>{
         <Grid container>
                        <Grid item xs={2}></Grid> 
                        <Grid item xs={8}>
-                       <TextField error={Errors.email} onChange={formHandle} fullWidth sx={{marginBottom:'10px'}} helperText={Errors.email} multiline placeholder='Enter your email' name='email' id="email" label="Email" type="email" variant="standard" /><br/>
-                       <TextField error={Errors.userName} onChange={formHandle} fullWidth sx={{marginBottom:'10px'}} helperText={Errors.userName} multiline placeholder='Enter username' id="userName" name='userName' label="Username" variant="standard" /><br/>
-                       <FormControl variant="standard" fullWidth>
+                       <TextField error={Errors.email} onChange={formHandle} fullWidth sx={{marginBottom:'20px'}} helperText={Errors.email} multiline placeholder='Enter your email' name='email' id="email" label="Email" type="email" variant="standard" /><br/>
+                       <TextField error={Errors.userName} onChange={formHandle} fullWidth sx={{marginBottom:'20px'}} helperText={Errors.userName} multiline placeholder='Enter username' id="userName" name='userName' label="Username" variant="standard" /><br/>
+                       <FormControl variant="standard" fullWidth sx={{marginBottom:'20px'}}>
                             <InputLabel id="demo-simple-select-standard-label">Role</InputLabel>
                             <Select
                             value={reg.role}
@@ -94,7 +94,7 @@ const Signup=()=>{
                             </Select>
                         </FormControl>
                         <TextField error={!!Errors.password} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
-                        <FormLabel sx={{textAlign:'left'}}>Upload a profile picture</FormLabel>
+                        <FormLabel sx={{textAlign:'left',marginBottom:'10px'}}>Upload a profile picture</FormLabel>
                         <input onChange={(e)=>fileHandle(e)} type='file' name='profilepic' id="profilepic"></input><br/>
                         <Button onClick={handleReg}>Submit</Button>
                            </Grid> 

@@ -91,10 +91,7 @@ const Login=()=>{
                        <TextField error={Errors.password} helperText={Errors.password} fullWidth onChange={(e)=>(setPass(e.target.value))} sx={{marginBottom:'20px'}} placeholder='Enter password' id="password" type="password" label="Password" variant="standard" />
                           <Button onClick={handleLog}>Login</Button>
                            </Grid> 
-                       <Grid item xs={2}></Grid> 
-                       {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                           <Alert onClose={handleClose} severity="success"> yoooo wassup</Alert>
-                       </Snackbar> */}
+                       <Grid item xs={2}></Grid>
                        <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>
                            <Alert onClose={handleClose} severity="error"> Incorrect Username or Password</Alert>
                        </Snackbar>

@@ -10,7 +10,8 @@ const Follow=(props)=>{
     const [clicked,setClick]=useState(false);
     const [flwbtn,setFlwbtn]=useState('Follow');
     const [followAlert,setFollowalt]=useState(false);
-    const follower=localStorage.getItem('id');
+    const follower=localStorage.getItem('user');
+    const [warning, setwar] = useState(false);
     const following=props.id;
     const authName=props.name
     console.log(props);
@@ -34,8 +35,6 @@ const Follow=(props)=>{
     }
     
     const follow= ()=>{
-      
-        console.log(followingStatus);
         if(followingStatus===true){
             setFlwbtn('Following');
             axios.post('http://localhost:5000/follow',{follower:localStorage.getItem('id'),following:following}).then(res=>{
@@ -58,8 +57,9 @@ const Follow=(props)=>{
         setClick(false);
         
     }
-  
+  console.log(follower);
     const handleClick= ()=>{
+      
         setFollwingStatus(status=>!status);
       setClick(true);
       
@@ -72,6 +72,7 @@ const Follow=(props)=>{
   
       setFollowalt(false);
       setunFollowalt(false);
+      setwar(false);
     };
   
   
@@ -91,7 +92,7 @@ const Follow=(props)=>{
 
     return(
         <>
-        <Button onClick={handleClick}>
+        <Button disabled={follower?true:false} onClick={handleClick}>
             {flwbtn}
         </Button>
         <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={followAlert} onClose={handleClose}>
@@ -100,6 +101,9 @@ const Follow=(props)=>{
         <Snackbar anchorOrigin={{ vertical, horizontal}} autoHideDuration={3000} open={unfollowAlert} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success"> Successfully unfollowed {authName}</Alert>
         </Snackbar>
+        <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>
+                           <Alert onClose={handleClose} severity="warning"> LogIn to follow this author</Alert>
+            </Snackbar>
         </>
     );
 }

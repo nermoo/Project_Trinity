@@ -43,7 +43,7 @@ const Home=()=>{
                     <Grid item xs={10}>
                     <Element  className="element" id="containerElement" style={{
                         position: 'relative',
-                        height:'600px',
+                        height:'695px',
                         overflow: 'scroll',
                         overflowX:'hidden',
                         scrollbarWidth:'none'

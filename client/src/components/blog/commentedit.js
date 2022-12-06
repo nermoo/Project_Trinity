@@ -13,32 +13,41 @@ const Commentedit=(props)=>{
     const authName=localStorage.getItem('user');
     const [commentalt,setCommentalt]=useState(false);
     const [clear,setClear]=useState(false);
+    const [warning, setwar] = useState(false);
     const dispatch=useDispatch();
+    const vertical='top';
+    const horizontal='center';
     const blogid=props.id;
     const cmntSave=(e)=>{
-        axios.post('http://localhost:5000/comments/save',{blogid:blogid,comment:comment,authName:authName}).then(res=>{
-            if (res.data.status===true){
-                setComment('');
-                setCommentalt(true);
-                dispatch(updater());
-            }else{
-                console.log("not saved");
-            }
-        })
+        if(authName){
+            axios.post('http://localhost:5000/comments/save',{blogid:blogid,comment:comment,authName:authName}).then(res=>{
+                if (res.data.status===true){
+                    setComment('');
+                    setCommentalt(true);
+                    dispatch(updater());
+                }else{
+                    console.log("not saved");
+                }
+            })
+        }else{
+            setwar(true)
+        }
     }
-    // console.log(props);
-    // console.log(comment,blogid,authName);
+    
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
         }
     
         setCommentalt(false);
+        setwar(false);
       };
 
     useEffect(()=>{
 
     },[clear])
+
+    
 
     return(
         <>
@@ -65,6 +74,9 @@ const Commentedit=(props)=>{
         </Snackbar>
             </Grid>
             </Grid>
+            <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>
+                           <Alert onClose={handleClose} severity="warning"> LogIn to post comments</Alert>
+            </Snackbar>
         </>
     );
 }

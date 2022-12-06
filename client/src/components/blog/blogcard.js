@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Avatar, CardMedia, Chip, Grid, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import axios from 'axios';
 import { useEffect, useState } from 'react'; 
 import { Link } from 'react-router-dom';
@@ -40,6 +41,7 @@ export default function BlogCard(props) {
     const [content,setContent]=useState('');
     const [name,setName]=useState('');
     const [authid,setAuthid]=useState('');
+    const [saved,setSaved]=useState(false);
     const id=props.id;
     const fetchData=async ()=>{
         axios.post('http://localhost:5000/blog/post',{id:id}).then(res=>{
@@ -72,6 +74,7 @@ export default function BlogCard(props) {
     const profilepic='http://localhost:5000/'+authres.image;
 
     const addBookmark=()=>{
+        setSaved(true);
         const user=localStorage.getItem('id');
         axios.post('http://localhost:5000/blog/saved',{userid:user,postid:id}).then(res=>{
             console.log(res.data);
@@ -118,7 +121,10 @@ export default function BlogCard(props) {
                               ))}
                               <Grid item sx={{marginTop:'auto',marginBottom:'auto'}}>
                                   <IconButton onClick={addBookmark}>
+                                    {saved?
+                                    <BookmarkAddedIcon/>:
                                     <BookmarkAddOutlinedIcon />
+                                    }
                                   </IconButton>
                               </Grid>
                               

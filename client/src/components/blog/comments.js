@@ -43,6 +43,7 @@ const Comments=(props)=>{
                     
                     {
                        comments.map(comment=>{
+                        if(comment.authName)
                            return(
                                <Comment comment={comment}/>
                            )

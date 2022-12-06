@@ -8,6 +8,7 @@ import axios from 'axios';
 import Logout from './../auth/logout';
 import { useNavigate } from 'react-router-dom';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import NoDataSreen from '../common/nodatascreen';
 
 
 
@@ -35,7 +36,7 @@ const BloggerP=()=>{
         <Grid container>
                 
             <Routes>
-            {/* <Route path='/followers' element={<Followers/>}/> */}
+            <Route path='/followers' element={<NoDataSreen/>}/>
             <Route path='/saved' element={<Saved List={saved}/>}/>
             </Routes>
             </Grid>

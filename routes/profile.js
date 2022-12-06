@@ -7,12 +7,16 @@ const post=require('./../models/post');
 router.post('/info',(req,res)=>{
     var id=req.body.id;
             var items=[];
-            saved.find({userId:id},function(err,docs){   
+            saved.find({userId:id},function(err,docs){
                 docs.map(doc=>(
                     post.findById(doc.postId,{day:0,month:0,tags:0,image:0,post:0},function(err,item){
-                        user.findById(item.authorid,{email:0,password:0,role:0,profilePic:0},function(err,name){
-                            items.push({item,name});
-                        })
+                        if(item?.authorid==null){
+                            console.log("null");
+                        }else{
+                            user.findById(item?.authorid,{email:0,password:0,role:0,profilePic:0},function(err,name){
+                                items.push({item,name});
+                            })
+                        }
                     })
                 ))
             })
