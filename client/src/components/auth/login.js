@@ -2,10 +2,12 @@ import React from 'react';
 import {Grid, TextField, Button, Typography,Snackbar,Alert} from '@mui/material';
 import { useEffect,useRef,useState } from 'react';
 import axios from 'axios';
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions';
+import Card from './../common/card';
+import { textAlign } from '@mui/system';
 
 
 
@@ -86,10 +88,20 @@ const Login=()=>{
         <Grid container>
                        <Grid item xs={2}></Grid> 
                        <Grid item xs={8}>
+                       <Card header='Login'>
                        <Typography sx={{color:'red',fontSize:'12px'}}>{loginEr}</Typography>
                        <TextField error={Errors.userName} helperText={Errors.userName} fullWidth onChange={(e)=>(setUname(e.target.value))} sx={{marginBottom:'10px', marginTop:'20px'}} multiline placeholder='Enter username' id="userName" label="Username" variant="standard" /><br/>
                        <TextField error={Errors.password} helperText={Errors.password} fullWidth onChange={(e)=>(setPass(e.target.value))} sx={{marginBottom:'20px'}} placeholder='Enter password' id="password" type="password" label="Password" variant="standard" />
+                          <div style={{marginTop:'10px', textAlign:'center'}}>
                           <Button onClick={handleLog}>Login</Button>
+                          </div>
+                          <div style={{margin:'20px 0 10px 0',textAlign:'end'}}>
+                            <span>
+                                Don't have an account yet? 
+                                <Link style={{textDecoration:'none'}} to={'/auth/signup'}> Sign up</Link>
+                            </span>
+                          </div>
+                        </Card>
                            </Grid> 
                        <Grid item xs={2}></Grid>
                        <Snackbar anchorOrigin={{ vertical, horizontal}} open={warning} onClose={handleClose}>

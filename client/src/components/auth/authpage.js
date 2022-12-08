@@ -28,7 +28,7 @@ export default function LoginForm() {
     <Grid container>
       <Grid item xs={1} md={2} lg={3}></Grid>
       <Grid item xs={10} md={8} lg={6}>
-      <Card sx={{height:'450px'}}>
+      <Card sx={{height:'500px',marginTop:'20px'}}>
       <Box sx={{ textAlign:'center', width: '100%', typography: 'body1' }} >
       <TabContext sx value={value} >
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >

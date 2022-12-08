@@ -31,7 +31,7 @@ const Nav=()=>{
       setComp('Hi '+user);
     }else{
       setProf(false);
-      setLink('/auth');
+      setLink('/auth/login');
       setComp('Login/Signup');
     }
    

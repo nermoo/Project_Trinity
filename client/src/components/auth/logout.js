@@ -12,7 +12,11 @@ const Logout=()=>{
     const logout=()=>{
         localStorage.clear();
         dispatch(login());
-        navigate('/auth');
+        navigate('/auth/login');
+
+    }
+
+    const confirmation=()=>{
 
     }
 

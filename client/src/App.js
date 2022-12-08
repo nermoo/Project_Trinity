@@ -12,6 +12,7 @@ import Followers from './components/blogger/followers';
 import Blogcon from './components/blog/blogcontent';
 import Readerprofile from './components/reader/readerProfile';
 import SavedItems from './components/reader/savedItems';
+import Signup from './components/auth/signup';
 
 
 
@@ -22,8 +23,9 @@ function App() {
         <Nav/>
       <Routes>
       <Route exact path='/' element={<Home/>}/>          
-      <Route path='/auth' element={<Auth/>}>
-
+      <Route path='auth'>
+        <Route path='login' element={<Login/>}/>
+        <Route path='signup' element={<Signup/>}/>
       </Route>
 
       <Route path='/editor' element={<Editor/>}/>
@@ -41,6 +43,7 @@ function App() {
         <Route path='user'>
           <Route path=':name' element={<Readerprofile/>}>
             <Route path='saved' element={<SavedItems/>}/>
+            <Route path='following' element={<Followers/>}/>
           </Route>
         </Route>
       </Route>

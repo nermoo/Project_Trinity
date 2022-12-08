@@ -1,8 +1,9 @@
 import React from 'react';
-import {useState} from 'react';
-import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography,FormLabel } from '@mui/material';
+import {useState, useEffect} from 'react';
+import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography, FormLabel, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Card from './../common/card';
 
 
 const Signup=()=>{
@@ -17,9 +18,7 @@ const Signup=()=>{
     const [image,setImg]=useState();
     const [Errors,setErr]=useState({});
     let navigate = useNavigate();
-
-
-  console.log(reg);
+    const [alert,setAlert]=useState(false);
 
   const formHandle=(e)=>{
     const { name, value } = e.target;
@@ -54,7 +53,9 @@ const Signup=()=>{
         formdata.append('email',reg.email);
         formdata.append('role',reg.role);
         formdata.append('password',reg.password);
-        formdata.append('image',image);
+        if(image){
+          formdata.append('image',image);
+        }
         for(var pair of formdata.entries()) {
           console.log(pair[0]+', '+pair[1]);
         }
@@ -62,7 +63,10 @@ const Signup=()=>{
 
           console.log(res.status);
           if(res.status===200){
-            navigate("/auth");
+            setAlert(true);
+            setTimeout(()=>{
+              navigate("/auth/login");
+            },2000)
           }
           //this should redirected to the authpage.
         })
@@ -73,11 +77,22 @@ const Signup=()=>{
     return errors;
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlert(false);
+  };
+
+  useEffect(()=>{
+
+  },[alert])
 
     return(
         <Grid container>
                        <Grid item xs={2}></Grid> 
                        <Grid item xs={8}>
+                        <Card header="Sign up"> 
                        <TextField error={Errors.email} onChange={formHandle} fullWidth sx={{marginBottom:'20px'}} helperText={Errors.email} multiline placeholder='Enter your email' name='email' id="email" label="Email" type="email" variant="standard" /><br/>
                        <TextField error={Errors.userName} onChange={formHandle} fullWidth sx={{marginBottom:'20px'}} helperText={Errors.userName} multiline placeholder='Enter username' id="userName" name='userName' label="Username" variant="standard" /><br/>
                        <FormControl variant="standard" fullWidth sx={{marginBottom:'20px'}}>
@@ -94,11 +109,23 @@ const Signup=()=>{
                             </Select>
                         </FormControl>
                         <TextField error={!!Errors.password} fullWidth onChange={formHandle} sx={{marginBottom:'20px'}} helperText={Errors.password} placeholder='Enter password' id="filled-basic" type='password' name='password' label="Password" variant="standard" />
-                        <FormLabel sx={{textAlign:'left',marginBottom:'10px'}}>Upload a profile picture</FormLabel>
-                        <input onChange={(e)=>fileHandle(e)} type='file' name='profilepic' id="profilepic"></input><br/>
-                        <Button onClick={handleReg}>Submit</Button>
+                        <FormLabel sx={{textAlign:'left'}}>Upload a profile picture</FormLabel>
+                        <input onChange={(e)=>fileHandle(e)} type='file' name='profilepic' id="profilepic" style={{marginTop:'20px', marginLeft:'20px'}}></input><br/>
+                        <div style={{margin:'10px 0 20px 0', textAlign:'center'}}>
+                        <Button  onClick={handleReg}>Submit</Button>
+                        </div>
+                          <div style={{margin:'20px 0 10px 0',textAlign:'end'}}>
+                            <span>
+                                Already have an account? 
+                                <Link style={{textDecoration:'none'}} to={'/auth/login'}> Login</Link>
+                            </span>
+                          </div>
+                        </Card>
                            </Grid> 
                        <Grid item xs={2}></Grid> 
+                       <Snackbar anchorOrigin={{ vertical:'top', horizontal:'center'}} open={alert} onClose={handleClose}>
+                           <Alert onClose={handleClose} severity="success"> Account created sucessfully</Alert>
+                       </Snackbar>
                     </Grid>
     );
 }
