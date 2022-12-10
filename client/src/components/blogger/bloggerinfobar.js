@@ -11,7 +11,7 @@ const BloggerInfobar=(props)=>{
     const [activeTab,setActiveTab]= useState('followers')
     const name=blogger.name;
     const profilePhoto='http://localhost:5000/'+blogger.profilePic;
-    const numberOfFollowers=12;
+    const numberOfFollowers=props.followers;
     const numberofArticles=props.articles;
     const id=props.id;
     // const { activeTab,dispatchActiveTab }= useContext(AppContext)
@@ -21,7 +21,7 @@ const BloggerInfobar=(props)=>{
     //     dispatchActiveTab(tabName);
     // }
     const fetchData=()=>{
-        axios.post('/profile/blogger',{id:id}).then(res=>{
+        axios.post('http://localhost:5000/profile/blogger',{id:id}).then(res=>{
             setBlogger(res.data.userInfo);
         })
     }

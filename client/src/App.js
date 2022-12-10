@@ -23,7 +23,6 @@ function App() {
 
   const dispatchActiveTab = (tabName) => {
     // switch (actionType)
-    console.log(tabName);
     setActiveTab(tabName);
   }
 

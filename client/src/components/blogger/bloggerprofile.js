@@ -16,15 +16,19 @@ const BloggerP=()=>{
 
     //get the bloggerid from the localstorage and send dat to the node app and get an list of post id from the database
     const [ids,setIds]=useState([]);
+    const [followers,setFollowers]=useState([]);
     const id=localStorage.getItem('id');
     const navigate=useNavigate();
     const newBlog=()=>{
         navigate('/editor');
     }
-    const fetchData=()=>{
-        axios.post('http://localhost:5000/',{id:id}).then(res=>{
-            console.log(res.data);
+    
+    const fetchData=async()=>{
+        await axios.post('http://localhost:5000/',{id:id}).then(res=>{
             setIds(res.data);
+        })
+        axios.post('http://localhost:5000/profile/followers',{id:id}).then(res=>{
+            setFollowers(res.data)
         })
     }
 
@@ -35,12 +39,12 @@ const BloggerP=()=>{
     return(
         <div>
         <Grid container>
-            <Infobar articles={ids.length} id={id}/>
+            <Infobar followers={followers.length} articles={ids.length} id={id}/>
         </Grid>
         <Grid container>
                 
             <Routes>
-            <Route path='/followers' element={<Followers/>}/>
+            <Route path='/followers' element={<Followers List={followers}/>}/>
             <Route path='/articles' element={<Articles List={ids}/>}/>
             </Routes>
             </Grid>
