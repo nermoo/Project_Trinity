@@ -18,16 +18,17 @@ const Comment=(props)=>{
                     <Grid container>
                         <Grid item xs={10}>
                             <Typography sx={{ color: 'gray', marginBottom: '5px' }}>
-                                {author}
+                                {author} 
+                                <span style={{marginLeft:'20px',fontSize:'10px'}}>
+                                    {date}
+                                </span>
+
                             </Typography>
                         </Grid>
                         <Grid item xs={1}></Grid>
                     </Grid>
                     <Typography sx={{ marginRight: '5px' }}>
                         {content}
-                    </Typography>
-                    <Typography sx={{ fontSize: '10px', marginTop: '5px', color: 'gray' }}>
-                        {date}
                     </Typography>
                 </CardContent>
                </Grid>

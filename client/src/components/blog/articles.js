@@ -4,6 +4,7 @@ import Scroll from 'react-scroll';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Link } from 'react-router-dom';
+import NoDataSreen from '../common/nodatascreen';
 
 
 
@@ -22,69 +23,74 @@ const Articles =(props)=>{
         <Grid container>
             <Grid item xs={2}></Grid>
             <Grid item xs={8}>
-            <Element  className="element" id="containerElement" style={{
-          position: 'relative',
-          height:'460px',
-          overflow: 'scroll',
-          overflowX:'hidden',
-          scrollbarWidth:'none'
-          
-
-          
-        }}>
-        {Articles.map(article=>{
-            return(
-                <Grid container>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-            
-            
-                
-                    <Card sx={{marginBottom:'10px',marginTop:'10px'}} variant='outlined'>
-                    <Grid container>
-                        <Grid item xs={8}>
-                            <Link to={`/posts/${article._id}`} style={{textDecoration:'none'}}>
-                            <Typography underline='none' sx={{margin:'10px',fontSize:{},color:'black',textDecoration:'none'}}>
-                                {article.title}
-                            </Typography>
-                            </Link>
-                        <Typography sx={{color:'gray', fontSize:'14px',margin:'10px'}} >
-                            Published on {months[article.month]}&nbsp; {article.day}
-                        </Typography>
-                        </Grid>
-                        <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={1}>
-                            <Grid container>
-                                <Grid item>
-                                    <ArrowUpwardIcon sx={{fontSize:{xs:'small'}}}/>
-                                </Grid>
-                                <Grid item>
-                                    <Typography>{upvotes}</Typography>
-                                    </Grid>
-                            </Grid>
-                         
-                        </Grid>
-                        <Grid item xs={1} sx={{margin:'auto'}}>
-                            <Grid container>
-                                <Grid item>< ChatBubbleOutlineIcon/></Grid>
-                                <Grid item>{comments}</Grid>
-                            </Grid>
-                            
-                        </Grid>
-                    </Grid>
-                
-                
-                </Card>
-            
-            
-       
-                
-            </Grid>
-            <Grid item xs={1}></Grid>
-        </Grid>
-            );
-        })}
-
-        </Element>
+                {Articles.length===0? 
+                <NoDataSreen type='Articles'/>:
+                (
+                    <Element  className="element" id="containerElement" style={{
+                        position: 'relative',
+                        height:'590px',
+                        overflow: 'scroll',
+                        overflowX:'hidden',
+                        scrollbarWidth:'none'
+                        
+              
+                        
+                      }}>
+                      {Articles.map(article=>{
+                          return(
+                              <Grid container>
+                          <Grid item xs={1}></Grid>
+                          <Grid item xs={10}>
+                          
+                          
+                              
+                                  <Card sx={{marginBottom:'10px',marginTop:'10px'}} variant='outlined'>
+                                  <Grid container>
+                                      <Grid item xs={8}>
+                                          <Link to={`/posts/${article._id}`} style={{textDecoration:'none'}}>
+                                          <Typography underline='none' sx={{margin:'10px',fontSize:{},color:'black',textDecoration:'none'}}>
+                                              {article.title}
+                                          </Typography>
+                                          </Link>
+                                      <Typography sx={{color:'gray', fontSize:'14px',margin:'10px'}} >
+                                          Published on {months[article.month]}&nbsp; {article.day}
+                                      </Typography>
+                                      </Grid>
+                                      <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={1}>
+                                          <Grid container>
+                                              <Grid item>
+                                                  <ArrowUpwardIcon sx={{fontSize:{xs:'small'}}}/>
+                                              </Grid>
+                                              <Grid item>
+                                                  <Typography>{upvotes}</Typography>
+                                                  </Grid>
+                                          </Grid>
+                                       
+                                      </Grid>
+                                      <Grid item xs={1} sx={{margin:'auto'}}>
+                                          <Grid container>
+                                              <Grid item>< ChatBubbleOutlineIcon/></Grid>
+                                              <Grid item>{comments}</Grid>
+                                          </Grid>
+                                          
+                                      </Grid>
+                                  </Grid>
+                              
+                              
+                              </Card>
+                          
+                          
+                     
+                              
+                          </Grid>
+                          <Grid item xs={1}></Grid>
+                      </Grid>
+                          );
+                      })}
+              
+                      </Element>
+                )
+                }
                 
                 </Grid>
                 <Grid item xs={2}></Grid>

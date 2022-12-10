@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import Login from './components/auth/login';
 import Auth from './components/auth/authpage';
 import Footer from './components/home/footer';
@@ -13,12 +13,23 @@ import Blogcon from './components/blog/blogcontent';
 import Readerprofile from './components/reader/readerProfile';
 import SavedItems from './components/reader/savedItems';
 import Signup from './components/auth/signup';
+import { AppContext } from './context';
 
 
 
 function App() {
+
+  const [activeTab,setActiveTab] = useState('');
+
+  const dispatchActiveTab = (tabName) => {
+    // switch (actionType)
+    console.log(tabName);
+    setActiveTab(tabName);
+  }
+
   return (
     <div className="App">
+      <AppContext.Provider value={{ activeTab, dispatchActiveTab }}>
       <Router>
         <Nav/>
       <Routes>
@@ -51,6 +62,7 @@ function App() {
       </Routes>
       {/* <Footer/> */}
       </Router>
+      </AppContext.Provider>
     </div>
   );
 }

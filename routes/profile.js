@@ -47,6 +47,26 @@ router.post('/reader',(req,res)=>{
 
 })
 
+router.post('/blogger',(req,res)=>{
+    var id=req.body.id;
+    user.findById(id,{email:0,password:0,role:0},async function(err,doc){
+        if(err){
+            console.log(err);
+        }else{
+            var userInfo=doc;
+            var savedCount
+            saved.find({userId:id},function(err,docs){
+                savedCount=docs.length;
+            });
+            setTimeout(()=>{
+                res.send({userInfo,savedCount})
+            }
+            , 2000)
+        }
+})
+
+})
+
 
 
 

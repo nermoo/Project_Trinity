@@ -25,7 +25,7 @@ const Nav=()=>{
       if(role==='writer'){
         setLink(`/profile/blogger/${name}/followers`);
       }else{
-        setLink(`/profile/user/${name}/`);
+        setLink(`/profile/user/${name}/following`);
       }
       setProf(true);
       setComp('Hi '+user);

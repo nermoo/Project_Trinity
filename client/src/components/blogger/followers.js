@@ -24,7 +24,7 @@ const Followers=()=>{ //we can use props to pass the height to this component fr
             <Grid item xs={8}>
             <Element  className="element" id="containerElement" style={{
           position: 'relative',
-          height:'460px',
+          height:'590px',
           overflow: 'scroll',
           overflowX:'hidden',
           scrollbarWidth:'none'

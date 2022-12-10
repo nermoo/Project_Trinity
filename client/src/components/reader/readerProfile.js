@@ -36,7 +36,7 @@ const BloggerP=()=>{
         <Grid container>
                 
             <Routes>
-            <Route path='/followers' element={<NoDataSreen/>}/>
+            <Route path='/following' element={<NoDataSreen/>}/>
             <Route path='/saved' element={<Saved List={saved}/>}/>
             </Routes>
             </Grid>
