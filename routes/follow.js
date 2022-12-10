@@ -13,7 +13,6 @@ router.post('/', async (req,res,next)=>{
             console.log(err);
             res.send({status:false});
         }else{
-            console.log(stat);
             res.send({status:true});
         }
     })

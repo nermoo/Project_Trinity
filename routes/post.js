@@ -93,7 +93,7 @@ router.post('/author',(req,res)=>{
             console.log(err);
         }
         else{
-            res.send({name:auth.name,image:auth.profilePic});
+            res.send({name:auth.name,image:auth.profilePic,id:auth.id});
         }
     });
 
@@ -120,7 +120,6 @@ router.post('/audio',(req,res)=>{
             console.log(err);
         }else{
             const txt = convert(content.post,{wordwrap: 130});
-            console.log(txt);
             const __dirname='./public/audio'
             var name=id;
             var filename=name+'.wav';

@@ -47,13 +47,13 @@ const Articles =(props)=>{
                                   <Card sx={{marginBottom:'10px',marginTop:'10px'}} variant='outlined'>
                                   <Grid container>
                                       <Grid item xs={8}>
-                                          <Link to={`/posts/${article._id}`} style={{textDecoration:'none'}}>
+                                          <Link to={`/posts/${article.data._id}`} style={{textDecoration:'none'}}>
                                           <Typography underline='none' sx={{margin:'10px',fontSize:{},color:'black',textDecoration:'none'}}>
-                                              {article.title}
+                                              {article.data.title}
                                           </Typography>
                                           </Link>
                                       <Typography sx={{color:'gray', fontSize:'14px',margin:'10px'}} >
-                                          Published on {months[article.month]}&nbsp; {article.day}
+                                          Published on {months[article.data.month]}&nbsp; {article.data.day}
                                       </Typography>
                                       </Grid>
                                       <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={1}>
@@ -69,8 +69,8 @@ const Articles =(props)=>{
                                       </Grid>
                                       <Grid item xs={1} sx={{margin:'auto'}}>
                                           <Grid container>
-                                              <Grid item>< ChatBubbleOutlineIcon/></Grid>
-                                              <Grid item>{comments}</Grid>
+                                              <Grid item sx={{marginRight:'5px'}}>< ChatBubbleOutlineIcon/></Grid>
+                                              <Grid item>{article.comments}</Grid>
                                           </Grid>
                                           
                                       </Grid>

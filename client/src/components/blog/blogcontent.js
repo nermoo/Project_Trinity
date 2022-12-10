@@ -26,10 +26,13 @@ export default function MultiActionAreaCard(props) {
   const [flwbtn,setFlwbtn]=useState('Follow');
   const [followstatus,setFollowingstatus]=useState(false);
   const [tags,setTags]=useState([]);
+  const [disableFollowBtn,setDisableFollowBtn]=useState(false);
   const cover='http://localhost:5000/posts/'+postres.image;
   const profilepic='http://localhost:5000/'+authres.image;
+  const user=localStorage.getItem('id');
   const vertical='top';
   const horizontal='center';
+  console.log(authres.id !==user);
   const fetchData=async ()=>{
     
         await axios.post('http://localhost:5000/blog/content',{id:id}).then(res=>{
@@ -40,9 +43,7 @@ export default function MultiActionAreaCard(props) {
                 setAuth(Ares.data);
                 setName(Ares.data.name)
                 axios.post('http://localhost:5000/follow/status',{reader:localStorage.getItem('id'), author:res.data.post.authorid}).then(fres=>{
-                  console.log(fres.data.status);
                   if(fres.data.status===true){
-                    console.log('im here');
                     setFollowingstatus(true);
                     setFlwbtn('Following');
         
@@ -105,9 +106,15 @@ export default function MultiActionAreaCard(props) {
     setSaved(false);
   };
 
+  console.log(disableFollowBtn);
   useEffect(()=>{
     fetchData();
-  },[id])
+    if(user){
+      authres.id===user? setDisableFollowBtn(true):setDisableFollowBtn(false);
+    }else{
+      setDisableFollowBtn(true);
+    }
+  },[authres.id, id, user])
 
   useEffect(()=>{
     //methna follow status eka true da kyla btn eke name eka change krnda
@@ -141,7 +148,7 @@ export default function MultiActionAreaCard(props) {
             
             </Grid>
             <Grid item xs={5}>
-              <Button onClick={handleClick}>{flwbtn}</Button>
+              <Button disabled={disableFollowBtn} onClick={handleClick}>{flwbtn}</Button>
               {/* <Follow id={postres.authorid} name={authres.name} list={following} status={followstatus}/> */}
             </Grid>
             <Grid item xs={1}>

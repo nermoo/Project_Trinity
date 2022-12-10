@@ -6,9 +6,7 @@ import { Button, Card, Grid } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Logout from './../auth/logout';
-import { useNavigate } from 'react-router-dom';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import NoDataSreen from '../common/nodatascreen';
+import Following from './following';
 
 
 
@@ -16,11 +14,15 @@ const BloggerP=()=>{
 
     //get the bloggerid from the localstorage and send dat to the node app and get an list of post id from the database
     const [saved,setSaved]=useState([]);
+    const [following,setFollowing]=useState([]);
     const id=localStorage.getItem('id');
     
     const fetchData=()=>{
         axios.post('http://localhost:5000/profile/info',{id:id}).then(res=>{
             setSaved(res.data);
+        })
+        axios.post('http://localhost:5000/profile/following',{id:id}).then(res=>{
+            setFollowing(res.data);
         })
     }
 
@@ -31,12 +33,12 @@ const BloggerP=()=>{
     return(
         <div>
         <Grid container>
-            <Infobar id={id}/>
+            <Infobar following={following.length} id={id}/>
         </Grid>
         <Grid container>
                 
             <Routes>
-            <Route path='/following' element={<NoDataSreen/>}/>
+            <Route path='/following' element={<Following List={following}/>}/>
             <Route path='/saved' element={<Saved List={saved}/>}/>
             </Routes>
             </Grid>

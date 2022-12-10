@@ -22,7 +22,7 @@ const BloggerP=()=>{
     const newBlog=()=>{
         navigate('/editor');
     }
-    
+
     const fetchData=async()=>{
         await axios.post('http://localhost:5000/',{id:id}).then(res=>{
             setIds(res.data);

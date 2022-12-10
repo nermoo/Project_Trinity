@@ -4,7 +4,6 @@ import axios from 'axios';
 const Audio=(props)=>{
     const id=props.id;
     const source=`http://localhost:5000/audio/${id}.wav`;
-    console.log(id);
     const [ares,setAres]=useState('');
 
     const fetchData=()=>{

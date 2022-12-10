@@ -13,9 +13,7 @@ router.get('/', async (req,res,next)=>{
             console.log(err);
         }
         else{
-            // console.log("Result : ", docs._id);
             let iden=docs._id;
-            console.log(docs);
             res.send(iden)
         }
     });

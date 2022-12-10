@@ -80,7 +80,6 @@ router.post('/followers',(req,res)=>{
                     if(err){
                         console.log(err);
                     }else{
-                        console.log(user);
                         list.push(user);
                     }
                 })
@@ -94,7 +93,30 @@ router.post('/followers',(req,res)=>{
 
 })
 
+router.post('/following',(req,res)=>{
+    const id=req.body.id;
+    followers.find({reader:id},(err,docs)=>{
+        if(err){
+            console.log(err);
+        }else{
+            var list=[];
+            docs.map(data=>{
+                user.findById(data.blogger,{email:0,password:0,role:0},(err,user)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        list.push(user);
+                    }
+                })
+             })
+             setTimeout(()=>{
+                res.send(list);
+            }
+            , 2000)
+        }
+    })
 
+})
 
 
 

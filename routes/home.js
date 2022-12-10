@@ -2,6 +2,7 @@ const express= require('express');
 const router=express.Router();
 const posts=require('./../models/post');
 const users=require('./../models/user');
+const comment=require('../models/comment');
 
 router.get('/', async (req,res)=>{
 
@@ -19,7 +20,7 @@ router.get('/', async (req,res)=>{
    
 })
 
-router.post('/',(req,res)=>{
+router.post('/',async(req,res)=>{
     let id=req.body.id;
     posts.find({authorid:id},{authorid:0,post:0,tags:0,image:0,__v:0},function(err,docs){
         if(err){
@@ -27,9 +28,17 @@ router.post('/',(req,res)=>{
         }else{
             var list=[];
             docs.map(data=>{
-                list.push(data);
+                comment.count({blogid:data.id,authName:{$ne:null}},(err,cnum)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    list.push({data:data,comments:cnum});
+                })
+
              })
-            res.send(list);
+             setTimeout(()=>{
+                 res.send(list);
+            },2500)
         }
     })
 })

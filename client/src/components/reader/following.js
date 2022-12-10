@@ -14,7 +14,7 @@ const Followers=(props)=>{
             <Grid item xs={2}></Grid>
             <Grid item xs={8}>
             {followers.length===0?
-            <NoDataSreen type="Followers"/>:
+            <NoDataSreen type="Following Authors"/>:
             (
             <Element  className="element" id="containerElement" style={{
           position: 'relative',
