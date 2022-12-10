@@ -16,7 +16,6 @@ const Saveditems =(props)=>{
     const Element=Scroll.Element;
     const savedArticles=props.List;
     
-    console.log(props.List);
     return(
         <Grid container>
             <Grid item xs={2}></Grid>

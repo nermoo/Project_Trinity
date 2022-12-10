@@ -32,7 +32,6 @@ export default function MultiActionAreaCard(props) {
   const user=localStorage.getItem('id');
   const vertical='top';
   const horizontal='center';
-  console.log(authres.id !==user);
   const fetchData=async ()=>{
     
         await axios.post('http://localhost:5000/blog/content',{id:id}).then(res=>{
@@ -65,8 +64,6 @@ export default function MultiActionAreaCard(props) {
   
   
     const follow= ()=>{
-      
-      console.log(followstatus);
       if(followstatus===true){
           setFlwbtn('Following');
           axios.post('http://localhost:5000/follow',{follower:localStorage.getItem('id'),following:postres.authorid}).then(res=>{

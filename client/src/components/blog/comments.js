@@ -14,9 +14,7 @@ const Comments=(props)=>{
     console.log(comments);
     const fetchData=()=>{
         axios.post('http://localhost:5000/comments/get',{id:blogid}).then(res=>{
-            console.log(res.data.list);
             setComments(res.data);
-
         })
     }
 

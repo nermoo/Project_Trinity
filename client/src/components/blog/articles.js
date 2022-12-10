@@ -16,7 +16,6 @@ const Articles =(props)=>{
     const Element=Scroll.Element;
     const months=['January','February','March','April','May','June','July','August','September','Octomber','November','December'];
     const Articles=props.List;
-    const comments=12;
     const upvotes=78;
     console.log(props.List);
     return(

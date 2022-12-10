@@ -8,18 +8,15 @@ import { AppContext } from '../../context';
 const BloggerInfobar=(props)=>{
 
     const [blogger,setBlogger]=useState({});
-    const [activeTab,setActiveTab]= useState('followers')
+    const [activeTab,setActiveTab]= useState('')
     const name=blogger.name;
     const profilePhoto='http://localhost:5000/'+blogger.profilePic;
     const numberOfFollowers=props.followers;
     const numberofArticles=props.articles;
     const id=props.id;
-    // const { activeTab,dispatchActiveTab }= useContext(AppContext)
     console.log(activeTab);
 
-    // const tabChange=(tabName)=>{
-    //     dispatchActiveTab(tabName);
-    // }
+    
     const fetchData=()=>{
         axios.post('http://localhost:5000/profile/blogger',{id:id}).then(res=>{
             setBlogger(res.data.userInfo);
@@ -28,7 +25,12 @@ const BloggerInfobar=(props)=>{
 
     useEffect(()=>{
         fetchData()
-    },[])
+        if(window.location.pathname.includes('articles')){
+            setActiveTab('articles');
+        }else{
+            setActiveTab('followers');
+        }
+    },[activeTab])
 
     return(
         <Grid container>
@@ -46,18 +48,22 @@ const BloggerInfobar=(props)=>{
                     </Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
-                        <Link to={`/profile/blogger/${localStorage.getItem('user')}/followers`} style={{textDecoration:'none'}} onClick={()=>setActiveTab('Followers')}>
-                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
+                        <Link to={`/profile/blogger/${localStorage.getItem('user')}/followers`} style={{textDecoration:'none'}} >
+                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}} onClick={()=>setActiveTab('Followers')}>
+                            <span style={activeTab=='followers'?{borderBottom:'2px solid black', paddingBottom:'2px'}:{}}>
                             Followers &nbsp;&nbsp;
-                        {numberOfFollowers}
+                            {numberOfFollowers}
+                            </span>
                         </Typography>
                         </Link>
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
                         <Link to={`/profile/blogger/${localStorage.getItem('user')}/articles`} style={{textDecoration:'none'}} >
                         <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}} onClick={()=>setActiveTab('Articles')}>
+                            <span  style={activeTab=='articles'?{borderBottom:'2px solid black', paddingBottom:'2px'}:{}}>
                             Articles&nbsp;&nbsp;
                         {numberofArticles}
+                            </span>
                         </Typography>
                         </Link>
                     </Grid>

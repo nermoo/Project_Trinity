@@ -9,6 +9,7 @@ const Infobar=(props)=>{
 
   const [user,setUser]=useState({});
   const [items,setItems]=useState('');
+  const [activeTab,setActiveTab]=useState('');
     const name=user.name;
     const profilePhoto='http://localhost:5000/'+user.profilePic;
     const numberOfFollowers=props.following;
@@ -17,7 +18,6 @@ const Infobar=(props)=>{
 
     const fetchData=()=>{
       axios.post('/profile/reader',{id:id}).then(res=>{
-          console.log(res.data);
           setUser(res.data.userInfo);
           setItems(res.data.savedCount);
       })
@@ -25,7 +25,12 @@ const Infobar=(props)=>{
 
   useEffect(()=>{
       fetchData()
-  },[])
+      if(window.location.pathname.includes('saved')){
+        setActiveTab('saved');
+    }else{
+        setActiveTab('following');
+    }
+  },[activeTab])
     
   return(
     <Grid container>
@@ -44,17 +49,21 @@ const Infobar=(props)=>{
                     <Grid item xs={1}></Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
                         <Link to={`/profile/user/${localStorage.getItem('user')}/following`} style={{textDecoration:'none'}}>
-                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
+                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}} onClick={()=>setActiveTab('Following')}>
+                            <span style={activeTab=='following'?{borderBottom:'2px solid black',paddingBottom:'2px'}:{}}>
                             Following &nbsp;&nbsp;
-                        {numberOfFollowers}
+                            {numberOfFollowers}
+                            </span>
                         </Typography>
                         </Link>
                     </Grid>
                     <Grid item xs={3} sx={{margin:'auto'}}>
                         <Link to={`/profile/user/${localStorage.getItem('user')}/saved`} style={{textDecoration:'none'}}>
-                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}}>
+                        <Typography sx={{margin:'auto',color:'black',textDecoration:'none'}} onClick={()=>setActiveTab('saved')}>
+                            <span style={activeTab=='saved'?{borderBottom:'2px solid black',paddingBottom:'2px'}:{}}>
                             Saved Items&nbsp;&nbsp;
-                        {numberofArticles}
+                            {numberofArticles}
+                            </span>
                         </Typography>
                         </Link>
                     </Grid>

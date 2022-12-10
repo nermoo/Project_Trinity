@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { Grid, Card, Stack, Chip, Avatar, Typography } from '@mui/material';
 import axios from 'axios';
 import { setTaglist } from '../../actions';
+import { Link } from 'react-router-dom';
 
 
 
@@ -70,9 +71,11 @@ const Quick=()=>{
                                 <Avatar sx={{width: 24, height: 24, margin:'10px',marginLeft:'auto',marginRight:'auto'}} alt={author.name} src={`http://localhost:5000/${author.profilePic}`}/>
                                 </Grid>
                                 <Grid sx={{marginTop:'auto',marginBottom:'auto'}} item xs={10}>
+                                    <Link to={`/${author._id}/about`} style={{textDecoration:'none',color:'black'}}>
                                     <Typography sx={{fontSize:'13px'}}>
                                     {author.name.charAt(0).toUpperCase() +author.name.slice(1)}
                                     </Typography>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         

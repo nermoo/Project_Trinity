@@ -13,6 +13,7 @@ import Blogcon from './components/blog/blogcontent';
 import Readerprofile from './components/reader/readerProfile';
 import SavedItems from './components/reader/savedItems';
 import Signup from './components/auth/signup';
+import About from './components/blogger/aboutuser';
 import { AppContext } from './context';
 
 
@@ -57,7 +58,7 @@ function App() {
           </Route>
         </Route>
       </Route>
-
+      <Route path=':id/about' element={<About/>}/>
       </Routes>
       {/* <Footer/> */}
       </Router>
